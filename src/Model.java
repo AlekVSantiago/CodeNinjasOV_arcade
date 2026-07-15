@@ -16,15 +16,10 @@ public class Model implements Observable {
 
     Model(ArrayList<Game> library, Theme theme) {
         this.library = library;
-        this.theme = theme;
     }
 
     public ArrayList<Game> getLibrary() {
         return this.library;
-    }
-
-    public Theme getTheme() {
-        return this.theme;
     }
 
     public static enum Theme {

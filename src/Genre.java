@@ -1,0 +1,3 @@
+public enum Genre {
+    HORROR, ACTION, SPORTS, PLATFORMER, RYTHM, RPG
+}

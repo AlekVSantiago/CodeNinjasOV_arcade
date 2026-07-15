@@ -11,7 +11,6 @@ public class Game {
     private String name;
     private String[] author;
     private String url;
-    private Genre genre;
     private boolean twoPlayer;
     private ArrayList<Tag> tags;
 
@@ -19,8 +18,6 @@ public class Game {
         this.name = name;
         this.author = author;
         this.url = url;
-        this.twoPlayer = twoPlayer;
-        this.tags = tags;
     }
 
     public String getName() {
@@ -33,10 +30,6 @@ public class Game {
 
     public String getUrl() {
         return this.url;
-    }
-
-    public Genre getGenre() {
-        return this.genre;
     }
 
     public boolean isTwoPlayer() {
@@ -63,26 +56,4 @@ public class Game {
         System.out.println("Now Playing " + this.name + "...");
     }
 
-    public static enum Tag {
-        SIXSEVEN,
-        FUNNY,
-        IMPOSSIBLE,
-        COOP,
-        SERIES;
-
-        private Tag() {
-        }
-    }
-
-    public static enum Genre {
-        HORROR,
-        ACTION,
-        RPG,
-        PLATFORMER,
-        PUZZLE,
-        FIGHTING;
-
-        private Genre() {
-        }
-    }
 }
