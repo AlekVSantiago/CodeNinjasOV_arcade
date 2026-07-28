@@ -1,17 +1,26 @@
 public class GBSGame extends Game{
-	private Template gameTemplate;
+    /*
+   Fields
+     */
+	private Template template;
 
-	
-	
+   /*
+   Constructor
+    */
 	GBSGame(String name, String[] author, String url, Template template){
 	    super(name, author, url);
-	    this.gameTemplate = template;
+	    this.template = template;
+    }
+  /*
+  Getters and Setters
+   */
+    public Template getTemplate(){
+        return this.template;
     }
 
-    public Template getGameTemplate(){
-        return this.gameTemplate;
+    public void setTemplate(Template template){
+        this.template = template;
+
     }
-    
-	
 
 }

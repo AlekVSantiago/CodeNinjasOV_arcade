@@ -3,5 +3,6 @@ public enum Tag {
     FUNNY,
     IMPOSSIBLE,
     COOP,
+    VS,
     SERIES;
 }
