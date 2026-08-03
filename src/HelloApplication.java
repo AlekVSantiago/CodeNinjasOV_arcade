@@ -14,12 +14,7 @@ public class HelloApplication extends Application {
     }
 
     public void start(Stage stage) throws IOException {
-        /*
-        Initialize the model to display
-         */
-        Model model = new Model(new ArrayList(), Theme.NEUTRAL);
-
-
+        Controller controller = new Controller();
        /*
        Tab Initialization
         */
