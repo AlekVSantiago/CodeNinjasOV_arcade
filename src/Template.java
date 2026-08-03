@@ -1,4 +1,7 @@
 public enum Template {
     INVADERS,
-    SOCCER;
+    KEEPER,
+    RIDDLE,
+    HIDING,
+    STARS
 }

@@ -7,6 +7,7 @@ public class CreateGame extends Game {
     /*
     Fields
      */
+    private Type gameType;
     private Belt beltColor;
     private boolean twoPlayer;
     private Genre genre;

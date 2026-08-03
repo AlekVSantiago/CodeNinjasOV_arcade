@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -12,9 +13,6 @@ import javafx.scene.control.TabPane;
 
 
 public class HelloApplication extends Application {
-    public HelloApplication() {
-    }
-
     public void start(Stage stage) throws IOException {
         Controller controller = new Controller();
         /*
@@ -54,43 +52,58 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
-
-
     /*
     This will create the thumbnail GUI to represent the Game
      */
     public VBox thumbnailBuilder(Game game){
         VBox result = new VBox(20);
         result.setOnMouseClicked(e -> System.out.println(game.getUrl()));
+        // Initialize universal labels
+        Label gameLabel = new Label(game.getName());
+        Label authorLabel = new Label(game.getAuthor().toString());
 
+        // Separate CreateGames with GBSGames
         if(game instanceof CreateGame){
             CreateGame workingGame = (CreateGame) game;
+
+            /*TODO change the beltLabel into an image corresponding to the belt color
+            -------------------------------------------------------------------------
+             */
             Label beltLabel = new Label(workingGame.getBeltColor().toString());
-            Label gameLabel = new Label(workingGame.getName());
-            Label authorLabel = new Label(workingGame.getAuthor().toString());
+            //-----------------------------------------------------------------------
 
             result.getChildren().addAll(beltLabel, gameLabel, authorLabel);
 
         }
         else if(game instanceof GBSGame){
             GBSGame workingGame = (GBSGame) game;
+
+            // TODO change the label into an image to be displayed
+            Label buildLabel = new Label("GBS");
+            //---------------------------------------------------
+
+            Label template = new Label(workingGame.getTemplate().toString());
+            result.getChildren().addAll(template);
         }
-
-
-
         return new VBox(20);
     }
-
-
-
-
 
     /*
     This will populate the grid with game thumbnails
      */
-    public void populateGrid(String category){
+    public void populateGrid(String category, Controller controller){
         GridPane resultGrid = new GridPane();
+        int librarySize = controller.getModel().getLibrary().size();
+        for(int i = 0; i < librarySize; i++){
+            switch(category.toLowerCase()){
+                case "quest":
+                    for(int i = 0; i < librarySize; i++){
+                        
+                    }
+            }
+        }
+
+
 
     }
 }
