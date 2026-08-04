@@ -3,14 +3,12 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
-import java.util.Stack;
 
 public class Controller {
     private Model model;
 
-    Controller() throws FileNotFoundException {
+    Controller() throws Exception {
         this.model = initializeModel();
     }
 
@@ -29,152 +27,85 @@ public class Controller {
         ----------------------BeltColor  TwoPlayer  Genre  Tag
         ----------------------Template
      */
-    public Model initializeModel() throws FileNotFoundException {
-        File file = new File("games.csv");
+    public Model initializeModel() throws Exception {
+        File file = new File("/Users/aleksantiago/Desktop/codeNinjas/CodeNinjasOV_arcade/src/games.csv");
         Scanner scanner = new Scanner(file);
         String currentLine = scanner.nextLine();
-        ArrayList<Game> library = new ArrayList<Game>();
-        String[] currentLineArr = currentLine.split(",");
+        ArrayList<Game> library = new ArrayList<>();
+        String[] currentLineArr;
         while(scanner.hasNextLine()){
             currentLineArr = currentLine.split(",");
             library.add(textToGame(currentLineArr));
         }
         return new Model(library, Theme.NEUTRAL);
     }
-    public Game textToGame(String[] lineArr){
-        String name = lineArr[0];
-        String[] author = lineArr[1].split("-");
-        String url = lineArr[2];
-       if(lineArr.length == 7){ //If it is a create game
-           Genre genre = readGenre(lineArr[3]);
-           boolean twoPlayer = readTwoPlayer(lineArr[4]);
-           ArrayList<Tag> tags = readTags(lineArr[5]);
-           Belt beltColor = readBelt(lineArr[6]);
-           return new CreateGame(name, author, url, genre, twoPlayer, tags, beltColor);
-       }
-       else if(lineArr.length == 4){
-            Template template = readTemplate(lineArr[3]);
-            return  new GBSGame(name, author, url, template);
-       }
-       else{
-           System.out.println("Unable to return any game or whatever");
-           return null;
-       }
+    public Game textToGame(String[] lineArr) throws Exception {
+        Game result = null;
+        String name = lineArr[1];
+        String[] author = lineArr[2].split(";");
+        String url = lineArr[3];
+        if(lineArr[0].equalsIgnoreCase("quest") || lineArr[0].equalsIgnoreCase("sensei") || lineArr[0].equalsIgnoreCase("freestyle")){
+            Belt belt = readBelt(lineArr[4]);
+            boolean twoPlayer = readTwoPlayer(lineArr[5]);
+            Genre genre = readGenre(lineArr[6]);
+            ArrayList<Tag> tags = new ArrayList<>();
+
+            if(lineArr[7].contains(";")){
+                String[] tagArr = lineArr[7].split(";");
+                for(int i = 0; i < tagArr.length; i++){
+                    tags.add(readTag(tagArr[i]));
+                }
+            }
+            result = new CreateGame(name, author, url, genre, twoPlayer, tags, belt);
+        }else if(lineArr[0].equalsIgnoreCase("gbs")){
+            Template template = readTemplate(lineArr[4]);
+            result = new GBSGame(name, author, url, template);
+        }
+        return result;
     }
     // TODO implement this later for GBS games
-    private Template readTemplate(String s) {
-
-        //Just return this for now
-        return Template.INVADERS;
+    private Template readTemplate(String s) throws Exception{
+        return switch (s.toLowerCase()) {
+            case "invaders" -> Template.INVADERS;
+            case "keeper" -> Template.KEEPER;
+            case "riddle" -> Template.HIDING;
+            case "stars" -> Template.STARS;
+            default -> throw new Exception("Template cannot be found");
+        };
     }
 
     private boolean readTwoPlayer(String s) {
-        if(s.toLowerCase().equals("true")){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return s.equalsIgnoreCase("true");
     }
-    /*
-    HORROR, ACTION, SPORTS, PLATFORMER, MUSIC, RPG
-     */
-    private Genre readGenre(String s) {
-        switch(s.toLowerCase()){
-            case "horror":
-                return Genre.HORROR;
-            case "action":
-                return Genre.ACTION;
-            case "sports":
-                return Genre.SPORTS;
-            case "platformer":
-                return Genre.PLATFORMER;
-            case "music":
-                return Genre.MUSIC;
-            case "rpg":
-                return Genre.RPG;
-            default:
-                System.out.println("Cannot find which enum this is or whatever");
-                return null;
-        }
+    private Genre readGenre(String s) throws Exception {
+        return switch (s.toLowerCase()) {
+            case "horror" -> Genre.HORROR;
+            case "action" -> Genre.ACTION;
+            case "sports" -> Genre.SPORTS;
+            case "platformer" -> Genre.PLATFORMER;
+            case "music" -> Genre.MUSIC;
+            case "rpg" -> Genre.RPG;
+            default -> throw new Exception("Genre cannot be found");
+        };
     }
-    /*
-    RELAXING,
-    FUNNY,
-    IMPOSSIBLE,
-    COOP,
-    VS,
-    SERIES;
-     */
-    public ArrayList<Tag> readTags(String s){
-        ArrayList<Tag> result = new ArrayList<Tag>();
-        if(s.contains(",")){
-            String[] sArr = s.split(",");
-            for(int i = 0; i < sArr.length; i++){
-                switch(s){
-                    case "relaxing":
-                        result.add(Tag.RELAXING);
-                        break;
-                    case "funny":
-                        result.add(Tag.FUNNY);
-                        break;
-                    case "impossible":
-                        result.add(Tag.IMPOSSIBLE);
-                        break;
-                    case "coop":
-                        result.add(Tag.COOP);
-                        break;
-                    case "vs":
-                        result.add(Tag.VS);
-                        break;
-                    case "SERIES":
-                        result.add(Tag.SERIES);
-                        break;
-                    default:
-                        System.out.println("Tag not found");
-                }
-            }
-            return result;
-        }else{
-            switch(s){
-                case "relaxing":
-                    result.add(Tag.RELAXING);
-                    break;
-                case "funny":
-                    result.add(Tag.FUNNY);
-                    break;
-                case "impossible":
-                    result.add(Tag.IMPOSSIBLE);
-                    break;
-                case "coop":
-                    result.add(Tag.COOP);
-                    break;
-                case "vs":
-                    result.add(Tag.VS);
-                    break;
-                case "SERIES":
-                    result.add(Tag.SERIES);
-                    break;
-                default:
-                    System.out.println("Tag not found");
-            }
-        }
-
-        return result;
+    public Tag readTag(String s) throws Exception {
+        return switch(s.toLowerCase()){
+            case "relaxing" -> Tag.RELAXING;
+            case "funny" -> Tag.FUNNY;
+            case "impossible" -> Tag.IMPOSSIBLE;
+            case "coop" -> Tag.COOP;
+            case "vs" -> Tag.VS;
+            case "series" -> Tag.SERIES;
+            default -> throw new Exception("Tag Cannot be found");
+        };
     }
-    public Belt readBelt(String s){
-        switch(s.toLowerCase()){
-            case "white":
-                return Belt.WHITE;
-            case "yellow":
-                return Belt.YELLOW;
-            case "orange":
-                return Belt.ORANGE;
-            case "blue":
-                return Belt.BLUE;
-            default:
-                System.out.println("Defaulting to white");
-                return Belt.WHITE;
-        }
+    public Belt readBelt(String s) throws Exception {
+        return switch (s.toLowerCase()) {
+            case "white" -> Belt.WHITE;
+            case "yellow" -> Belt.YELLOW;
+            case "orange" -> Belt.ORANGE;
+            case "blue" -> Belt.BLUE;
+            default -> throw new Exception("Tag not found");
+        };
     }
 }

@@ -94,16 +94,20 @@ public class HelloApplication extends Application {
     public void populateGrid(String category, Controller controller){
         GridPane resultGrid = new GridPane();
         int librarySize = controller.getModel().getLibrary().size();
+        int row = 0;
+        int col = 0;
         for(int i = 0; i < librarySize; i++){
-            switch(category.toLowerCase()){
-                case "quest":
-                    for(int i = 0; i < librarySize; i++){
-                        
-                    }
+            Game currGame = controller.getModel().getLibrary().get(i);
+            if(category.equals(currGame.getName())){
+                resultGrid.add(thumbnailBuilder(controller.getModel().getLibrary().get(i)), row, col);
+                if(col == 4){
+                    row++;
+                    col = 0;
+                }
+                else{
+                    col++;
+                }
             }
         }
-
-
-
     }
 }
