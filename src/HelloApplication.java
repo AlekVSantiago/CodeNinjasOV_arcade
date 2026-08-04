@@ -13,7 +13,7 @@ import javafx.scene.control.TabPane;
 
 
 public class HelloApplication extends Application {
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws Exception {
         Controller controller = new Controller();
         /*
         GridPane Initialization
