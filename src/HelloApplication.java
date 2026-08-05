@@ -1,11 +1,13 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import javafx.scene.control.Tab;
@@ -18,10 +20,12 @@ public class HelloApplication extends Application {
         /*
         GridPane Initialization
          */
-        GridPane questGrid = new GridPane();
+        GridPane questGrid = populateGrid("quest", controller);
         GridPane freeGrid = new GridPane();
         GridPane buildGrid = new GridPane();
         GridPane senseiGrid = new GridPane();
+        /*
+
 
        /*
        Tab Initialization
@@ -32,21 +36,24 @@ public class HelloApplication extends Application {
         Tab senseiTab = new Tab("Sensei", senseiGrid);
 
 
+
         /*
         All of the box components that the screen is going to be made of
          */
         BorderPane root = new BorderPane();
         TabPane tabs = new TabPane(questTab, freeTab, buildTab, senseiTab);
-        root.setTop(tabs);
-        /*
-            Grid of Games
-         */
-        GridPane gameGrid = new GridPane();
+
 
         /*
         rootSetting for the main BorderPane of the window
          */
-        root.setCenter(gameGrid);
+        if(controller.getModel().getLibrary().size() == 0){
+            System.out.println("Empty games brother");
+        }
+        else{
+            System.out.println("There are " + controller.getModel().getLibrary().size() + " games here");
+        }
+        root.setCenter(tabs);
         Scene scene = new Scene(root, 500, 500);
         stage.setTitle("Code Ninjas Oro Valley");
         stage.setScene(scene);
@@ -57,10 +64,13 @@ public class HelloApplication extends Application {
      */
     public VBox thumbnailBuilder(Game game){
         VBox result = new VBox(20);
+        result.setPadding(new Insets(37));
         result.setOnMouseClicked(e -> System.out.println(game.getUrl()));
+
         // Initialize universal labels
         Label gameLabel = new Label(game.getName());
-        Label authorLabel = new Label(game.getAuthor().toString());
+
+        Label authorLabel = new Label(game.getAuthorString());
 
         // Separate CreateGames with GBSGames
         if(game instanceof CreateGame){
@@ -72,7 +82,7 @@ public class HelloApplication extends Application {
             Label beltLabel = new Label(workingGame.getBeltColor().toString());
             //-----------------------------------------------------------------------
 
-            result.getChildren().addAll(beltLabel, gameLabel, authorLabel);
+            result.getChildren().addAll(gameLabel, authorLabel, beltLabel);
 
         }
         else if(game instanceof GBSGame){
@@ -85,29 +95,30 @@ public class HelloApplication extends Application {
             Label template = new Label(workingGame.getTemplate().toString());
             result.getChildren().addAll(template);
         }
-        return new VBox(20);
+        return result;
     }
 
     /*
     This will populate the grid with game thumbnails
      */
-    public void populateGrid(String category, Controller controller){
+    public GridPane populateGrid(String category, Controller controller){
         GridPane resultGrid = new GridPane();
         int librarySize = controller.getModel().getLibrary().size();
         int row = 0;
         int col = 0;
         for(int i = 0; i < librarySize; i++){
             Game currGame = controller.getModel().getLibrary().get(i);
-            if(category.equals(currGame.getName())){
-                resultGrid.add(thumbnailBuilder(controller.getModel().getLibrary().get(i)), row, col);
-                if(col == 4){
-                    row++;
-                    col = 0;
-                }
-                else{
-                    col++;
-                }
+            resultGrid.add(thumbnailBuilder(controller.getModel().getLibrary().get(i)), row, col);
+            if(row == 4){
+                col++;
+                row = 0;
             }
+            else{
+                row++;
+            }
+
         }
+        return resultGrid;
     }
+
 }

@@ -30,10 +30,14 @@ public class Controller {
     public Model initializeModel() throws Exception {
         File file = new File("/Users/aleksantiago/Desktop/codeNinjas/CodeNinjasOV_arcade/src/games.csv");
         Scanner scanner = new Scanner(file);
-        String currentLine = scanner.nextLine();
+        String currentLine = "";
+        if(scanner.hasNextLine()){
+            scanner.nextLine();
+        }
         ArrayList<Game> library = new ArrayList<>();
         String[] currentLineArr;
         while(scanner.hasNextLine()){
+            currentLine = scanner.nextLine();
             currentLineArr = currentLine.split(",");
             library.add(textToGame(currentLineArr));
         }

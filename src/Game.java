@@ -46,5 +46,12 @@ public class Game {
 
     public void play() {
         System.out.println("Now Playing " + this.name + "..."); }
+    public String getAuthorString(){
+        String result = "";
+        for(int i = 0; i < getAuthor().length; i++){
+            result += this.getAuthor()[i] + ", ";
+        }
+        return result;
+    }
 
 }
