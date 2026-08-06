@@ -69,31 +69,19 @@ public class HelloApplication extends Application {
 
         // Initialize universal labels
         Label gameLabel = new Label(game.getName());
-
         Label authorLabel = new Label(game.getAuthorString());
 
         // Separate CreateGames with GBSGames
         if(game instanceof CreateGame){
             CreateGame workingGame = (CreateGame) game;
-
-            /*TODO change the beltLabel into an image corresponding to the belt color
-            -------------------------------------------------------------------------
-             */
             Label beltLabel = new Label(workingGame.getBeltColor().toString());
-            //-----------------------------------------------------------------------
-
             result.getChildren().addAll(gameLabel, authorLabel, beltLabel);
-
         }
         else if(game instanceof GBSGame){
             GBSGame workingGame = (GBSGame) game;
+            Label templateLabel = new Label(workingGame.getTemplate().toString());
+            result.getChildren().addAll(gameLabel, authorLabel, templateLabel);
 
-            // TODO change the label into an image to be displayed
-            Label buildLabel = new Label("GBS");
-            //---------------------------------------------------
-
-            Label template = new Label(workingGame.getTemplate().toString());
-            result.getChildren().addAll(template);
         }
         return result;
     }

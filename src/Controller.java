@@ -31,45 +31,45 @@ public class Controller {
         File file = new File("/Users/aleksantiago/Desktop/codeNinjas/CodeNinjasOV_arcade/src/games.csv");
         Scanner scanner = new Scanner(file);
         String currentLine = "";
-        if(scanner.hasNextLine()){
+        if (scanner.hasNextLine()) {
             scanner.nextLine();
         }
         ArrayList<Game> library = new ArrayList<>();
         String[] currentLineArr;
-        while(scanner.hasNextLine()){
+        while (scanner.hasNextLine()) {
             currentLine = scanner.nextLine();
             currentLineArr = currentLine.split(",");
             library.add(textToGame(currentLineArr));
         }
         return new Model(library, Theme.NEUTRAL);
     }
-    public Game textToGame(String[] lineArr) throws Exception {
-        Game result = null;
-        String name = lineArr[1];
-        String[] author = lineArr[2].split(";");
-        String url = lineArr[3];
-        if(lineArr[0].equalsIgnoreCase("quest") || lineArr[0].equalsIgnoreCase("sensei") || lineArr[0].equalsIgnoreCase("freestyle")){
-            Belt belt = readBelt(lineArr[4]);
-            boolean twoPlayer = readTwoPlayer(lineArr[5]);
-            Genre genre = readGenre(lineArr[6]);
-            ArrayList<Tag> tags = new ArrayList<>();
 
-            if(lineArr[7].contains(";")){
-                String[] tagArr = lineArr[7].split(";");
-                for(int i = 0; i < tagArr.length; i++){
-                    tags.add(readTag(tagArr[i]));
-                }
+    public Game textToGame(String[] lineArr) throws Exception {
+        String gameName = lineArr[1];
+        ArrayList<String> authorList = new ArrayList<>();
+        if (lineArr[2].contains(";")) {
+            String[] authorArr = lineArr[2].split(";");
+            for (int i = 0; i < authorArr.length; i++) {
+                authorList.add(authorArr[i]);
             }
-            result = new CreateGame(name, author, url, genre, twoPlayer, tags, belt);
-        }else if(lineArr[0].equalsIgnoreCase("gbs")){
-            Template template = readTemplate(lineArr[4]);
-            result = new GBSGame(name, author, url, template);
+        } else {
+            authorList.add(lineArr[2]);
         }
-        return result;
+
+        String url = lineArr[3];
+        Belt beltColor = readBelt(lineArr[4]);
+        Boolean twoPlayer = readTwoPlayer(lineArr[5]);
+        Genre genre = readGenre(lineArr[6]);
+
+        CreateGame resultGame = new CreateGame(gameName, authorList, url, genre, twoPlayer, new ArrayList<Tag>(), beltColor);
+        return resultGame;
     }
-    // TODO implement this later for GBS games
-    private Template readTemplate(String s) throws Exception{
-        return switch (s.toLowerCase()) {
+
+
+
+    // TODO implement this later for GBS games private Template readTemplate(String s) throws Exception{
+    public Template readTemplate(String s) throws Exception {
+            return switch (s.toLowerCase()) {
             case "invaders" -> Template.INVADERS;
             case "keeper" -> Template.KEEPER;
             case "riddle" -> Template.HIDING;

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class GBSGame extends Game{
     /*
    Fields
@@ -7,7 +9,7 @@ public class GBSGame extends Game{
    /*
    Constructor
     */
-	GBSGame(String name, String[] author, String url, Template template){
+	GBSGame(String name, ArrayList<String> author, String url, Template template){
 	    super(name, author, url);
 	    this.template = template;
     }

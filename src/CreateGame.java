@@ -1,6 +1,5 @@
 
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class CreateGame extends Game {
@@ -15,7 +14,7 @@ public class CreateGame extends Game {
     /*
     Constructor
      */
-    CreateGame(String name, String[] author, String url, Genre genre, boolean twoPlayer, ArrayList<Tag> tags, Belt beltColor) {
+    CreateGame(String name, ArrayList<String> author, String url, Genre genre, boolean twoPlayer, ArrayList<Tag> tags, Belt beltColor) {
         super(name, author, url);
         this.beltColor = beltColor;
         this.twoPlayer = twoPlayer;
