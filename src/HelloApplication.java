@@ -6,17 +6,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-
-
 public class HelloApplication extends Application {
     public void start(Stage stage) throws Exception {
         Controller controller = new Controller();
@@ -32,6 +27,11 @@ public class HelloApplication extends Application {
         VBox mainBox = new VBox();
         HBox buttonBox = new HBox();
 
+        //setting Panes and Boxes with each other
+        root.setCenter(mainBox);
+        mainBox.getChildren().add(buttonBox);
+
+
         /*
         Button Tabs Collection
          */
@@ -44,29 +44,28 @@ public class HelloApplication extends Application {
         /*
         GridPane Initialization
          */
-        GridPane questGrid = populateGrid("quest", controller);
+        GridPane questGrid = new GridPane();
         GridPane freeGrid = new GridPane();
         GridPane buildGrid = new GridPane();
         GridPane senseiGrid = new GridPane();
 
-        root.setCenter(mainBox);
-       switch(workingBtn) {
-           case questBtn:
+       switch(workingBtn.getText()) {
+           case "QUEST":
                mainBox.getChildren().add(questGrid);
-           case freeBtn:
+           case "FREESTYLE":
                mainBox.getChildren().add(freeGrid);
-           case buildBtn:
+           case "GAME BUILDING SESSION":
                mainBox.getChildren().add(buildGrid);
-           case senseiBtn:
+           case "SENSEI":
                mainBox.getChildren().add(senseiGrid);
            default:
-               System.out.println("Throw an exception here oops brother");
-
-
+               System.out.println("Throw an exception here brother");
        }
 
+
+
         Scene scene = new Scene(root, 500, 500);
-        stage.setTitle("Code Ninjas Oro Valley");
+        stage.setTitle("Code Ninjas OV");
         stage.setScene(scene);
         stage.show();
     }
@@ -75,6 +74,7 @@ public class HelloApplication extends Application {
      */
     public VBox thumbnailBuilder(Game game){
         VBox result = new VBox(20);
+        result.setBorder(new Border());
         result.setPadding(new Insets(37));
         result.setOnMouseClicked(e -> System.out.println(game.getUrl()));
 
@@ -119,5 +119,4 @@ public class HelloApplication extends Application {
         }
         return resultGrid;
     }
-
 }
