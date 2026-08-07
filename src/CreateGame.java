@@ -1,5 +1,6 @@
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CreateGame extends Game {
@@ -14,8 +15,8 @@ public class CreateGame extends Game {
     /*
     Constructor
      */
-    CreateGame(String name, ArrayList<String> author, String url, Genre genre, boolean twoPlayer, ArrayList<Tag> tags, Belt beltColor) {
-        super(name, author, url);
+    CreateGame(String name, ArrayList<String> author, String url, LocalDate releaseDate, Genre genre, boolean twoPlayer, ArrayList<Tag> tags, Belt beltColor) {
+        super(name, author, url, releaseDate);
         this.beltColor = beltColor;
         this.twoPlayer = twoPlayer;
         this.genre = genre;

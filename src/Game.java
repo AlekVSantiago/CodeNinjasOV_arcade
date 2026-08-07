@@ -3,20 +3,23 @@
 // (powered by Fernflower decompiler)
 //
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 
 public class Game {
     private String name;
     private ArrayList<String> author;
     private String url;
+    private LocalDate releaseDate;
 
     /*
     Constructor`
      */
-    Game(String name, ArrayList<String> author, String url) {
+    Game(String name, ArrayList<String> author, String url, LocalDate releaseDate) {
         this.name = name;
         this.author = author;
         this.url = url;
+        this.releaseDate = releaseDate;
     }
 
     /*
@@ -54,4 +57,11 @@ public class Game {
         return result;
     }
 
+    public LocalDate getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
+    }
 }

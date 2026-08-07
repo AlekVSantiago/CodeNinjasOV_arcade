@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class GBSGame extends Game{
@@ -9,10 +10,12 @@ public class GBSGame extends Game{
    /*
    Constructor
     */
-	GBSGame(String name, ArrayList<String> author, String url, Template template){
-	    super(name, author, url);
+	GBSGame(String name, ArrayList<String> author, String url, LocalDate releaseDate, Template template){
+	    super(name, author, url, releaseDate);
 	    this.template = template;
     }
+
+
   /*
   Getters and Setters
    */
