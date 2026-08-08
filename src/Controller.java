@@ -1,7 +1,10 @@
 
 
+import javafx.util.converter.LocalDateStringConverter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -45,24 +48,8 @@ public class Controller {
     }
 
     public Game textToGame(String[] lineArr) throws Exception {
-        String gameName = lineArr[1];
-        ArrayList<String> authorList = new ArrayList<>();
-        if (lineArr[2].contains(";")) {
-            String[] authorArr = lineArr[2].split(";");
-            for (int i = 0; i < authorArr.length; i++) {
-                authorList.add(authorArr[i]);
-            }
-        } else {
-            authorList.add(lineArr[2]);
-        }
-
-        String url = lineArr[3];
-        Belt beltColor = readBelt(lineArr[4]);
-        Boolean twoPlayer = readTwoPlayer(lineArr[5]);
-        Genre genre = readGenre(lineArr[6]);
-
-        CreateGame resultGame = new CreateGame(gameName, authorList, url, genre, twoPlayer, new ArrayList<Tag>(), beltColor);
-        return resultGame;
+        LocalDate now = LocalDate.now();
+       return new Game("Beans", new ArrayList<String>(), "BeansAgain", now);
     }
 
 

@@ -28,19 +28,34 @@ public class HelloApplication extends Application {
         HBox buttonBox = new HBox();
 
         //setting Panes and Boxes with each other
-        root.setCenter(mainBox);
         mainBox.getChildren().add(buttonBox);
+        root.setCenter(mainBox);
+
 
 
         /*
         Button Tabs Collection
          */
         Button questBtn = new Button("QUEST");
+        questBtn.setMinSize(180, 80);
         Button freeBtn = new Button("FREESTYLE");
+        freeBtn.setMinSize(180, 80);
         Button buildBtn = new Button("GAME BUILDING SESSION");
+        buildBtn.setMinSize(180, 80);
         Button senseiBtn = new Button("SENSEI");
+        senseiBtn.setMinSize( 180, 80);
         Button workingBtn = questBtn;
+        buttonBox.getChildren().addAll(questBtn, freeBtn, buildBtn, senseiBtn);
 
+        root.setStyle("-fx-background-color: black, -fx-stroke-color: white");
+        buttonBox.setSpacing(50);
+        buttonBox.setPadding(new Insets(50, 20, 20, 20));
+        buttonBox.setAlignment(Pos.TOP_CENTER);
+
+        questBtn.setStyle("-fx-background-color: dodgerblue; -fx-border-width: 10; -fx-border-color: yellow; -fx-border-radius: 7; -fx-background-radius: 10");
+        freeBtn.setStyle("-fx-background-color: dodgerblue;");
+        buildBtn.setStyle("-fx-background-color: dodgerblue;");
+        senseiBtn.setStyle("-fx-background-color: dodgerblue");
         /*
         GridPane Initialization
          */
@@ -74,7 +89,6 @@ public class HelloApplication extends Application {
      */
     public VBox thumbnailBuilder(Game game){
         VBox result = new VBox(20);
-        result.setBorder(new Border());
         result.setPadding(new Insets(37));
         result.setOnMouseClicked(e -> System.out.println(game.getUrl()));
 
