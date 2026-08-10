@@ -47,15 +47,10 @@ public class HelloApplication extends Application {
         Button workingBtn = questBtn;
         buttonBox.getChildren().addAll(questBtn, freeBtn, buildBtn, senseiBtn);
 
-        root.setStyle("-fx-background-color: black, -fx-stroke-color: white");
         buttonBox.setSpacing(50);
         buttonBox.setPadding(new Insets(50, 20, 20, 20));
         buttonBox.setAlignment(Pos.TOP_CENTER);
 
-        questBtn.setStyle("-fx-background-color: dodgerblue; -fx-border-width: 10; -fx-border-color: yellow; -fx-border-radius: 7; -fx-background-radius: 10");
-        freeBtn.setStyle("-fx-background-color: dodgerblue;");
-        buildBtn.setStyle("-fx-background-color: dodgerblue;");
-        senseiBtn.setStyle("-fx-background-color: dodgerblue");
         /*
         GridPane Initialization
          */
@@ -80,6 +75,7 @@ public class HelloApplication extends Application {
 
 
         Scene scene = new Scene(root, 500, 500);
+       scene.getStylesheets().add("StyleSheet.css");
         stage.setTitle("Code Ninjas OV");
         stage.setScene(scene);
         stage.show();
