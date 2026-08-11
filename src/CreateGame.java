@@ -14,7 +14,7 @@ public class CreateGame extends Game {
      Constructor
     */
     CreateGame(String name,
-               ArrayList<String> author,
+               String author,
                String url,
                LocalDate releaseDate,
                Genre genre,

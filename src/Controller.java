@@ -43,11 +43,7 @@ public class Controller {
             currentLine = scanner.nextLine();
             currentLineArr = currentLine.split(",");
             String currName = currentLineArr[0];
-            ArrayList<String> currAuthor = new ArrayList<>();
-            String[] authorArr = currentLineArr[1].split(";");
-            if(authorArr.length > 0){
-                Collections.addAll(currAuthor, authorArr);
-            }
+            String currAuthor = currentLineArr[1];
             String currUrl = currentLineArr[2];
             LocalDate currReleaseDate = LocalDate.parse(currentLineArr[3]);
             boolean currTwoPlayer = currentLineArr[4].equalsIgnoreCase("true");

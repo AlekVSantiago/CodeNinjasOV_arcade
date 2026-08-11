@@ -1,20 +1,24 @@
+/*-----------------------------
+    Application base Styling
+------------------------------*/
 .root{
-    -fx-background-color: darkslateblue;
+    -fx-background-color: midnightblue;
 }
+/*------------------------
+    Title Label Styling
+-------------------------*/
 .app-title{
     -fx-font-family: pixelta;
     -fx-font-size: 80px;
     -fx-text-fill: steelblue;
 }
-.game-title-box{
-    -fx-background-color: black;
-    -fx-background-radius: 5;
-
-}
+/*------------------------------
+    Big Menu Button Styling
+------------------------------*/
 .big-button{
-    -fx-background-color: lavender;
+    -fx-background-color: floralwhite;
     -fx-background-radius: 15;
-    -fx-border-color: slateblue;
+    -fx-border-color: coral;
     -fx-border-width: 10;
     -fx-border-radius: 10;
     -fx-border-insets: 5;
@@ -24,40 +28,9 @@
     -fx-font-size: 30px;
 
 }
-
-.game-button{
-    -fx-background-color: aliceblue;
-    -fx-padding: 4px;
-}
-.game-box-content{
-    -fx-background-color: transparent;
-    -fx-background-radius: 10px;
-    -fx-text-fill: snow;
-}
-.game-info-box{
-    -fx-background-color: dodgerblue;
-}
-.game-release-box{
-
-}
-
-.thumbnail-title{
-    -fx-font-family: ARCADECLASSIC;
-    -fx-font-color: snow;
-    -fx-font-size: 25px;
-    -fx-text-fill: snow;
-}
-
-.thumbnail-author{
-    -fx-font-family: pixelta;
-    -fx-text-fill: black;
-    -fx-font-size: 30px;
-}
-.thumbnail-release{
-    -fx-font-family: arcadeclassic;
-    -fx-text-fill: black;
-    -fx-font-size: 18px;
-}
+/*-------------------------
+    ScrollPane Styling
+--------------------------*/
 .scroll-pane{
    -fx-background-color: transparent;
        -fx-background: transparent;
@@ -67,7 +40,59 @@
 .scroll-pane .scroll-bar:vertical {
     -fx-opacity: 0;
 }
-
 .scroll-pane .scroll-bar:horizontal {
     -fx-opacity: 0;
+}
+
+/*-----------------------
+    Game Box Styling
+-------------------------*/
+.game-button{
+    -fx-background-color: floralwhite;
+    -fx-padding: 4px;
+}
+
+.button-content{ /* VBox contains everything inside of the game Button*/
+    -fx-background-color: transparent;
+    -fx-background-radius: 10px;
+}
+/*
+    Box containers for nodes
+*/
+.title-box{
+    -fx-background-color: indigo;
+    -fx-background-radius: 5;
+}
+.author-box{
+    -fx-background-color: firebrick;
+    -fx-background-radius: 0px, 0px, 10px, 10px;
+}
+.release-box{
+
+}
+/*--------------------
+    Label Styling
+----------------------*/
+.title-label{
+    -fx-font-family: ARCADECLASSIC;
+    -fx-font-color: snow;
+    -fx-font-size: 25px;
+    -fx-text-fill: snow;
+}
+
+.author-label{
+    -fx-font-family: pixelta;
+    -fx-text-fill: snow;
+    -fx-font-size: 25px;
+}
+.release-label{
+    -fx-font-family: arcadeclassic;
+    -fx-text-fill: black;
+    -fx-font-size: 18px;
+}
+.select{
+
+}
+.unselected{
+
 }

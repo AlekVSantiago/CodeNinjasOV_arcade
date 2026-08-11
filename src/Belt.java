@@ -1,6 +1,12 @@
 public enum Belt {
+    GBS,
     WHITE,
     YELLOW,
     ORANGE,
-    BLUE
+    GREEN,
+    BLUE,
+    PURPLE,
+    BROWN,
+    RED,
+    BLACK
 }

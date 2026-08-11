@@ -104,40 +104,72 @@ public class HelloApplication extends Application {
     This will create the thumbnail GUI to represent the Game
      */
     public Button thumbnailBuilder(Game game){
+        /*
+        The button container that has everything
+         */
         VBox buttonGraphic = new VBox();
-        buttonGraphic.getStyleClass().add("game-box-content");
+        buttonGraphic.getStyleClass().add("content-box");
         buttonGraphic.setAlignment(Pos.TOP_CENTER);
+
+
+        /*
+            Initizlizing all labels
+         */
+        Label authorLabel = new Label(game.getAuthor());
+        Label releaseLabel = new Label("Published: " + game.getReleaseDate().toString());
         Label titleLabel = new Label(game.getName());
+
+        authorLabel.getStyleClass().add("author-label");
+        releaseLabel.getStyleClass().add("release-label");
+        titleLabel.getStyleClass().add("title-label");
+
+
         VBox titleBox = new VBox();
-        titleBox.getStyleClass().add("game-title-box");
+        titleBox.getStyleClass().add("title-box");
         titleBox.setPrefSize(150, 150);
         titleBox.getChildren().add(titleLabel);
         titleBox.setAlignment(Pos.CENTER);
 
+        /*
+            authorBox
+         */
+        VBox authorBox = new VBox();
+        authorBox.getStyleClass().addAll("author-box");
 
-        Label authorLabel = new Label(game.getAuthorString());
-        Label releaseLabel = new Label("Published: " + game.getReleaseDate().toString());
-        VBox infoBox = new VBox();
-        infoBox.getStyleClass().add("game-info-box");
-        infoBox.setAlignment(Pos.TOP_CENTER);
-        infoBox.setPrefSize(100,50);
-        infoBox.getChildren().addAll(authorLabel);
+        CreateGame workingGame = (CreateGame) game;
+        switch(workingGame.getBeltColor()){
+            case GBS -> authorBox.getStyleClass().add("gbs-belt");
+            case WHITE -> authorBox.getStyleClass().add("white-belt");
+            case YELLOW -> authorBox.getStyleClass().add("yellow-belt");
+            case ORANGE -> authorBox.getStyleClass().add("orange-belt");
+            case GREEN -> authorBox.getStyleClass().add("green-belt");
+            case BLUE -> authorBox.getStyleClass().add("blue-belt");
+            case PURPLE -> authorBox.getStyleClass().add("purple-belt");
+            case BROWN -> authorBox.getStyleClass().add("brown-belt");
+            case RED -> authorBox.getStyleClass().add("red-belt");
+            case BLACK -> authorBox.getStyleClass().add("black-belt");
+ }
+        authorBox.setAlignment(Pos.CENTER);
+        authorBox.setPrefSize(100,50);
+        authorBox.getChildren().addAll(authorLabel);
+
+
+        /*
+            Release Box 
+         */
         VBox releaseBox = new VBox();
         releaseBox.getStyleClass().add("game-release-box");
         releaseBox.setAlignment(Pos.BOTTOM_LEFT);
         releaseBox.setPrefSize(100,50);
         releaseBox.getChildren().addAll(releaseLabel);
-        titleLabel.getStyleClass().add("thumbnail-title");
 
         authorLabel.setAlignment(Pos.TOP_CENTER);
 
-        authorLabel.getStyleClass().add("thumbnail-author");
-        releaseLabel.getStyleClass().add("thumbnail-release");
 
 
 
 
-        buttonGraphic.getChildren().addAll(titleBox,infoBox,releaseBox);
+        buttonGraphic.getChildren().addAll(titleBox,authorBox,releaseBox);
         Button resultButton = new Button("");
         resultButton.setPrefSize(300, 250);
         resultButton.getStyleClass().add("game-button");

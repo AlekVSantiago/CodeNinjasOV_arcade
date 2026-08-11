@@ -10,7 +10,7 @@ public class GBSGame extends Game{
    /*
    Constructor
     */
-	GBSGame(String name, ArrayList<String> author, String url, LocalDate releaseDate, Template template){
+	GBSGame(String name, String author, String url, LocalDate releaseDate, Template template){
 	    super(name, author, url, releaseDate);
 	    this.template = template;
     }

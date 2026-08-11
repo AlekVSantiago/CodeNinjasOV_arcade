@@ -8,14 +8,15 @@ import java.time.LocalDate;
 
 public class Game {
     private String name;
-    private ArrayList<String> author;
+    private String author;
     private String url;
     private LocalDate releaseDate;
 
+
     /*
-    Constructor`
-     */
-    Game(String name, ArrayList<String> author, String url, LocalDate releaseDate) {
+        Constructor`
+    */
+    Game(String name, String author, String url, LocalDate releaseDate) {
         this.name = name;
         this.author = author;
         this.url = url;
@@ -29,7 +30,7 @@ public class Game {
         return this.name;
     }
 
-    public ArrayList<String> getAuthor() {
+    public String getAuthor() {
         return this.author;
     }
 
@@ -41,20 +42,15 @@ public class Game {
         this.name = name;
     }
 
-    public void  setAuthor(ArrayList<String> author){this.author = author;}
+    public void  setAuthor(String author){this.author = author;}
 
     public void setUrl(String url) {
         this.url = url;
     }
 
     public void play() {
-        System.out.println("Now Playing " + this.name + "..."); }
-    public String getAuthorString(){
-        String result = "";
-        for(int i = 0; i < getAuthor().size(); i++){
-            result += this.getAuthor().get(i) + ", ";
-        }
-        return result;
+        System.out.println("Now Playing " + this.name + "...");
+
     }
 
     public LocalDate getReleaseDate() {
