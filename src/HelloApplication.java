@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import javafx.scene.control.Tab;
@@ -15,6 +16,7 @@ import javafx.scene.control.TabPane;
 public class HelloApplication extends Application {
     public void start(Stage stage) throws Exception {
         Controller controller = new Controller();
+
         /* 1--------------------------
             INITIALIZING ALL UI COMPONENTS
             --------------------------
@@ -24,6 +26,9 @@ public class HelloApplication extends Application {
             Housing for all of the nodes
          */
         BorderPane root = new BorderPane();
+        root.getStyleClass().add("root");
+        Scene scene = new Scene(root, 500, 500);
+        scene.getStylesheets().add("StyleSheet.css");
         VBox mainBox = new VBox();
         HBox buttonBox = new HBox();
 
@@ -36,25 +41,32 @@ public class HelloApplication extends Application {
         /*
         Button Tabs Collection
          */
+        Button backButton = new Button("");
         Button questBtn = new Button("QUEST");
         questBtn.setMinSize(180, 80);
+        questBtn.getStyleClass().add("big-button");
         Button freeBtn = new Button("FREESTYLE");
         freeBtn.setMinSize(180, 80);
+        freeBtn.getStyleClass().add("big-button");
         Button buildBtn = new Button("GAME BUILDING SESSION");
         buildBtn.setMinSize(180, 80);
+        buildBtn.getStyleClass().add("big-button");
         Button senseiBtn = new Button("SENSEI");
         senseiBtn.setMinSize( 180, 80);
+        senseiBtn.getStyleClass().add("big-button");
         Button workingBtn = questBtn;
+        workingBtn.getStyleClass().add("big-button");
         buttonBox.getChildren().addAll(questBtn, freeBtn, buildBtn, senseiBtn);
 
-        buttonBox.setSpacing(50);
+        buttonBox.setSpacing(20);
         buttonBox.setPadding(new Insets(50, 20, 20, 20));
         buttonBox.setAlignment(Pos.TOP_CENTER);
 
         /*
         GridPane Initialization
          */
-        GridPane questGrid = new GridPane();
+        GridPane questGrid = populateGrid("quest",controller);
+        questGrid.setHgap(30);
         GridPane freeGrid = new GridPane();
         GridPane buildGrid = new GridPane();
         GridPane senseiGrid = new GridPane();
@@ -74,8 +86,6 @@ public class HelloApplication extends Application {
 
 
 
-        Scene scene = new Scene(root, 500, 500);
-       scene.getStylesheets().add("StyleSheet.css");
         stage.setTitle("Code Ninjas OV");
         stage.setScene(scene);
         stage.show();
@@ -83,28 +93,30 @@ public class HelloApplication extends Application {
     /*
     This will create the thumbnail GUI to represent the Game
      */
-    public VBox thumbnailBuilder(Game game){
-        VBox result = new VBox(20);
-        result.setPadding(new Insets(37));
-        result.setOnMouseClicked(e -> System.out.println(game.getUrl()));
+    public Button thumbnailBuilder(Game game){
+        VBox buttonGraphic = new VBox();
+        buttonGraphic.getStyleClass().add("game-box-content");
+        buttonGraphic.setAlignment(Pos.CENTER);
+        buttonGraphic.setSpacing(20);
+        Label titleLabel = new Label(game.getName());
 
-        // Initialize universal labels
-        Label gameLabel = new Label(game.getName());
+        titleLabel.getStyleClass().add("thumbnail-title");
         Label authorLabel = new Label(game.getAuthorString());
 
-        // Separate CreateGames with GBSGames
-        if(game instanceof CreateGame){
-            CreateGame workingGame = (CreateGame) game;
-            Label beltLabel = new Label(workingGame.getBeltColor().toString());
-            result.getChildren().addAll(gameLabel, authorLabel, beltLabel);
-        }
-        else if(game instanceof GBSGame){
-            GBSGame workingGame = (GBSGame) game;
-            Label templateLabel = new Label(workingGame.getTemplate().toString());
-            result.getChildren().addAll(gameLabel, authorLabel, templateLabel);
+        authorLabel.getStyleClass().add("thumbnail-author");
+        Rectangle placeHolderRectangle = new Rectangle(250, 113);
+        placeHolderRectangle.getStyleClass().add("placeholderImage");
+        placeHolderRectangle.setArcWidth(10);
+        placeHolderRectangle.setArcHeight(10);
 
-        }
+
+        buttonGraphic.getChildren().addAll(placeHolderRectangle, titleLabel, authorLabel);
+        Button result = new Button("");
+        result.getStyleClass().add("game-button");
+        result.setGraphic(buttonGraphic);
         return result;
+
+
     }
 
     /*

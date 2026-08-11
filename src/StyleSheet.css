@@ -1,15 +1,43 @@
+.root{
+    -fx-background-color: darkblue;
+}
+.placeholderImage{
+    -fx-fill: white;
+    -fx-background-radius: 30;
+}
 .big-button{
-    -fx-background-color: mediumblue;
+    -fx-background-color: steelblue;
+    -fx-background-radius: 15;
     -fx-border-color: gold;
     -fx-border-width: 10;
+    -fx-border-radius: 9;
+    -fx-border-insets: 5;
+
+    -fx-text-fill: snow;
+    -fx-font-family: impact;
+    -fx-font-size: 30px;
 
 }
 
-.back-button{
+.game-button{
     -fx-background-color: crimson;
+    -fx-background-radius: 20;
+}
+.game-box-content{
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+    -fx-text-fill: snow;
 }
 
-.game-box{
+.thumbnail-title{
+    -fx-font-family: impact;
+    -fx-font-color: white;
+    -fx-font-size: 20px;
+    -fx-text-fill: beige;
 }
 
-.rectangle-
+.thumbnail-author{
+    -fx-font-family: impact;
+    -fx-text-color: beige;
+    -fx-font-size: 10px;
+}
