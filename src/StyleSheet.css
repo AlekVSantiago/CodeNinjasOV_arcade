@@ -1,26 +1,31 @@
 .root{
-    -fx-background-color: darkblue;
+    -fx-background-color: darkslateblue;
 }
-.placeholderImage{
-    -fx-fill: white;
-    -fx-background-radius: 30;
+.app-title{
+    -fx-font-family: pixelta;
+    -fx-font-size: 80px;
+    -fx-text-fill: steelblue;
+}
+.game-title-box{
+    -fx-background-color: black;
+    -fx-background-radius: 20;
 }
 .big-button{
-    -fx-background-color: steelblue;
+    -fx-background-color: lavender;
     -fx-background-radius: 15;
-    -fx-border-color: gold;
+    -fx-border-color: slateblue;
     -fx-border-width: 10;
     -fx-border-radius: 9;
     -fx-border-insets: 5;
 
-    -fx-text-fill: snow;
-    -fx-font-family: impact;
+    -fx-text-fill: black;
+    -fx-font-family: arcadeclassic;
     -fx-font-size: 30px;
 
 }
 
 .game-button{
-    -fx-background-color: crimson;
+    -fx-background-color: lightgrey;
     -fx-background-radius: 20;
 }
 .game-box-content{
@@ -30,14 +35,27 @@
 }
 
 .thumbnail-title{
-    -fx-font-family: impact;
-    -fx-font-color: white;
-    -fx-font-size: 20px;
-    -fx-text-fill: beige;
+    -fx-font-family: ARCADECLASSIC;
+    -fx-font-color: snow;
+    -fx-font-size: 30px;
+    -fx-text-fill: snow;
 }
 
 .thumbnail-author{
-    -fx-font-family: impact;
-    -fx-text-color: beige;
-    -fx-font-size: 10px;
+    -fx-font-family: ARCADECLASSIC;
+    -fx-text-fill: black;
+    -fx-font-size: 30px;
+}
+.scroll-pane{
+   -fx-background-color: transparent;
+       -fx-background: transparent;
+       -fx-border-color: transparent;
+       -fx-padding: 0;
+}
+.scroll-pane .scroll-bar:vertical {
+    -fx-opacity: 0;
+}
+
+.scroll-pane .scroll-bar:horizontal {
+    -fx-opacity: 0;
 }

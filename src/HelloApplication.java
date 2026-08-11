@@ -4,17 +4,22 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.util.ArrayList;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+
 public class HelloApplication extends Application {
     public void start(Stage stage) throws Exception {
+        Font.loadFont(getClass().getResourceAsStream("src/fonts/ARCADECLASSIC.TTF"), 18);
+
+
+        Font.loadFont(getClass().getResourceAsStream("src/fonts/ka1.ttf"), 18);
+
+
         Controller controller = new Controller();
 
         /* 1--------------------------
@@ -30,18 +35,25 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(root, 500, 500);
         scene.getStylesheets().add("StyleSheet.css");
         VBox mainBox = new VBox();
+        mainBox.setSpacing(5);
         HBox buttonBox = new HBox();
 
         //setting Panes and Boxes with each other
-        mainBox.getChildren().add(buttonBox);
+        Label appTitle = new Label("Code Ninjas Oro Valley");
+        appTitle.getStyleClass().add("app-title");
+        mainBox.getChildren().addAll(appTitle,buttonBox);
+        mainBox.setAlignment(Pos.TOP_CENTER);
         root.setCenter(mainBox);
+
+
+        Font.loadFont(getClass().getResourceAsStream("/fonts/myfont.ttf"), 18);
+
 
 
 
         /*
         Button Tabs Collection
          */
-        Button backButton = new Button("");
         Button questBtn = new Button("QUEST");
         questBtn.setMinSize(180, 80);
         questBtn.getStyleClass().add("big-button");
@@ -66,28 +78,23 @@ public class HelloApplication extends Application {
         GridPane Initialization
          */
         GridPane questGrid = populateGrid(controller.getModel().getQuestGames());
-        questGrid.setHgap(30);
+        questGrid.setHgap(40);
+        questGrid.setVgap(20);
         GridPane freeGrid = populateGrid(controller.getModel().getFreestyleGames());
-        freeGrid.setHgap(30);
+        freeGrid.setHgap(40);
+        freeGrid.setVgap(20);
         GridPane buildGrid = populateGrid(controller.getModel().getGbsGames());
-        buildGrid.setHgap(30);
+        buildGrid.setHgap(40);
+        buildGrid.setVgap(20);
         GridPane senseiGrid = populateGrid(controller.getModel().getSenseiGames());
-        senseiGrid.setHgap(30);
+        senseiGrid.setAlignment(Pos.TOP_CENTER);
+        senseiGrid.setHgap(60);
+        senseiGrid.setVgap(20);
 
-       switch(workingBtn.getText()) {
-           case "QUEST":
-               mainBox.getChildren().add(questGrid);
-           case "FREESTYLE":
-               mainBox.getChildren().add(freeGrid);
-           case "GAME BUILDING SESSION":
-               mainBox.getChildren().add(buildGrid);
-           case "SENSEI":
-               mainBox.getChildren().add(senseiGrid);
-           default:
-               System.out.println("Throw an exception here brother");
-       }
-
-
+        ScrollPane gameScroll = new ScrollPane(senseiGrid);
+        gameScroll.setFitToWidth(true);
+        mainBox.getChildren().add(gameScroll);
+        mainBox.setPadding(new Insets(20));
 
         stage.setTitle("Code Ninjas OV");
         stage.setScene(scene);
@@ -99,22 +106,25 @@ public class HelloApplication extends Application {
     public Button thumbnailBuilder(Game game){
         VBox buttonGraphic = new VBox();
         buttonGraphic.getStyleClass().add("game-box-content");
-        buttonGraphic.setAlignment(Pos.CENTER);
-        buttonGraphic.setSpacing(20);
+        buttonGraphic.setAlignment(Pos.TOP_CENTER);
         Label titleLabel = new Label(game.getName());
 
         titleLabel.getStyleClass().add("thumbnail-title");
         Label authorLabel = new Label(game.getAuthorString());
+        authorLabel.setAlignment(Pos.TOP_CENTER);
 
         authorLabel.getStyleClass().add("thumbnail-author");
-        Rectangle placeHolderRectangle = new Rectangle(250, 113);
-        placeHolderRectangle.getStyleClass().add("placeholderImage");
-        placeHolderRectangle.setArcWidth(10);
-        placeHolderRectangle.setArcHeight(10);
+        VBox titleBox = new VBox();
+        titleBox.getStyleClass().add("game-title-box");
+        titleBox.setPrefSize(110, 140);
+        titleBox.getChildren().add(titleLabel);
+        titleBox.setAlignment(Pos.CENTER);
 
 
-        buttonGraphic.getChildren().addAll(placeHolderRectangle, titleLabel, authorLabel);
+
+        buttonGraphic.getChildren().addAll(titleBox,authorLabel);
         Button result = new Button("");
+        result.setPrefSize(300, 230);
         result.getStyleClass().add("game-button");
         result.setGraphic(buttonGraphic);
         return result;
@@ -130,13 +140,13 @@ public class HelloApplication extends Application {
         int row = 0;
         int col = 0;
         for(int i = 0; i < gameArr.size(); i++){
-            resultGrid.add(thumbnailBuilder(gameArr.get(i)), row, col);
-            if(row == 4){
-                col++;
-                row = 0;
+            resultGrid.add(thumbnailBuilder(gameArr.get(i)), col, row);
+            if(col == 3){
+                row++;
+                col = 0;
             }
             else{
-                row++;
+                col++;
             }
 
         }
