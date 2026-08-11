@@ -1,6 +1,6 @@
 public enum Type {
     QUEST,
     FREESTYLE,
-    SENSEI,
-    GBS
+    GBS,
+    SENSEI
 }

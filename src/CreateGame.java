@@ -1,5 +1,3 @@
-
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -7,20 +5,31 @@ public class CreateGame extends Game {
     /*
     Fields
      */
-    private Type gameType;
     private Belt beltColor;
     private boolean twoPlayer;
     private Genre genre;
     private ArrayList<Tag> tags;
+    private Type gameType;
     /*
-    Constructor
-     */
-    CreateGame(String name, ArrayList<String> author, String url, LocalDate releaseDate, Genre genre, boolean twoPlayer, ArrayList<Tag> tags, Belt beltColor) {
+     Constructor
+    */
+    CreateGame(String name,
+               ArrayList<String> author,
+               String url,
+               LocalDate releaseDate,
+               Genre genre,
+               boolean twoPlayer,
+               ArrayList<Tag> tags,
+               Belt beltColor,
+               Type gameType) {
+
         super(name, author, url, releaseDate);
-        this.beltColor = beltColor;
+
         this.twoPlayer = twoPlayer;
+        this.beltColor = beltColor;
         this.genre = genre;
         this.tags = tags;
+        this.gameType = gameType;
     }
 
     /*
@@ -54,5 +63,12 @@ public class CreateGame extends Game {
 
     public void setTags(ArrayList<Tag> tags) {
         this.tags = tags;
+    }
+    public Type getGameType() {
+        return gameType;
+    }
+
+    public void setGameType(Type gameType) {
+        this.gameType = gameType;
     }
 }

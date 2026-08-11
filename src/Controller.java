@@ -4,8 +4,10 @@ import javafx.util.converter.LocalDateStringConverter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Controller {
@@ -38,23 +40,50 @@ public class Controller {
             scanner.nextLine();
         }
         ArrayList<Game> library = new ArrayList<>();
+        ArrayList<Game> resultQuest = new ArrayList<>();
+        ArrayList<Game> resultFreestyle = new ArrayList<>();
+        ArrayList<Game> resultGbs = new ArrayList<>();
+        ArrayList<Game> resultSensei = new ArrayList<>();
         String[] currentLineArr;
         while (scanner.hasNextLine()) {
             currentLine = scanner.nextLine();
             currentLineArr = currentLine.split(",");
-            library.add(textToGame(currentLineArr));
+            String currName = currentLineArr[0];
+            ArrayList<String> currAuthor = new ArrayList<>();
+            String[] authorArr = currentLineArr[1].split(";");
+            if(authorArr.length > 0){
+                Collections.addAll(currAuthor, authorArr);
+            }
+            String currUrl = currentLineArr[2];
+            LocalDate currReleaseDate = LocalDate.parse(currentLineArr[3]);
+            boolean currTwoPlayer = currentLineArr[4].equalsIgnoreCase("true");
+
+            Belt currBelt = readBelt(currentLineArr[5]);
+            Genre currGenre = readGenre(currentLineArr[6]);
+            //Nothing to get Tags yet from currentLineArr[7]! Tags are not a thing yet
+            ArrayList<Tag> nothingTags = new ArrayList<>();
+            Type currType = readType(currentLineArr[8]);
+            CreateGame currGame = new CreateGame(currName, currAuthor, currUrl, currReleaseDate, currGenre, currTwoPlayer, nothingTags, currBelt, currType);
+
+            library.add(currGame);
+            switch(currGame.getGameType()){
+                case QUEST -> {
+                    resultQuest.add(currGame);
+                }
+                case FREESTYLE -> {
+                    resultFreestyle.add(currGame);
+                }
+                case GBS -> {
+                    resultGbs.add(currGame);
+                }
+                case SENSEI -> {
+                    resultSensei.add(currGame);
+                }
+            }
         }
-        return new Model(library, Theme.NEUTRAL);
+        return new Model(library, resultQuest, resultFreestyle, resultGbs, resultSensei, Theme.NEUTRAL);
     }
 
-    public Game textToGame(String[] lineArr) throws Exception {
-        LocalDate now = LocalDate.now();
-       return new Game("Beans", new ArrayList<String>(), "BeansAgain", now);
-    }
-
-
-
-    // TODO implement this later for GBS games private Template readTemplate(String s) throws Exception{
     public Template readTemplate(String s) throws Exception {
             return switch (s.toLowerCase()) {
             case "invaders" -> Template.INVADERS;
@@ -76,7 +105,7 @@ public class Controller {
             case "platformer" -> Genre.PLATFORMER;
             case "music" -> Genre.MUSIC;
             case "rpg" -> Genre.RPG;
-            default -> throw new Exception("Genre cannot be found");
+            default -> Genre.SPORTS;
         };
     }
     public Tag readTag(String s) throws Exception {
@@ -96,7 +125,16 @@ public class Controller {
             case "yellow" -> Belt.YELLOW;
             case "orange" -> Belt.ORANGE;
             case "blue" -> Belt.BLUE;
-            default -> throw new Exception("Tag not found");
+            default -> Belt.WHITE;
+        };
+    }
+    public Type readType(String s) throws Exception {
+        return switch(s.toLowerCase()){
+            case "quest" -> Type.QUEST;
+            case "freestyle" -> Type.FREESTYLE;
+            case "gbs" -> Type.GBS;
+            case "sensei" -> Type.SENSEI;
+            default -> throw new Exception("Type Cannot be found");
         };
     }
 }

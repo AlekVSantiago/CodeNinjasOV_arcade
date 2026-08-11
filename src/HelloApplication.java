@@ -65,11 +65,14 @@ public class HelloApplication extends Application {
         /*
         GridPane Initialization
          */
-        GridPane questGrid = populateGrid("quest",controller);
+        GridPane questGrid = populateGrid(controller.getModel().getQuestGames());
         questGrid.setHgap(30);
-        GridPane freeGrid = new GridPane();
-        GridPane buildGrid = new GridPane();
-        GridPane senseiGrid = new GridPane();
+        GridPane freeGrid = populateGrid(controller.getModel().getFreestyleGames());
+        freeGrid.setHgap(30);
+        GridPane buildGrid = populateGrid(controller.getModel().getGbsGames());
+        buildGrid.setHgap(30);
+        GridPane senseiGrid = populateGrid(controller.getModel().getSenseiGames());
+        senseiGrid.setHgap(30);
 
        switch(workingBtn.getText()) {
            case "QUEST":
@@ -122,14 +125,12 @@ public class HelloApplication extends Application {
     /*
     This will populate the grid with game thumbnails
      */
-    public GridPane populateGrid(String category, Controller controller){
+    public GridPane populateGrid(ArrayList<Game> gameArr){
         GridPane resultGrid = new GridPane();
-        int librarySize = controller.getModel().getLibrary().size();
         int row = 0;
         int col = 0;
-        for(int i = 0; i < librarySize; i++){
-            Game currGame = controller.getModel().getLibrary().get(i);
-            resultGrid.add(thumbnailBuilder(controller.getModel().getLibrary().get(i)), row, col);
+        for(int i = 0; i < gameArr.size(); i++){
+            resultGrid.add(thumbnailBuilder(gameArr.get(i)), row, col);
             if(row == 4){
                 col++;
                 row = 0;
