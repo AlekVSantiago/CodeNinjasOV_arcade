@@ -2,23 +2,24 @@
     Application base Styling
 ------------------------------*/
 .root{
-    -fx-background-color: midnightblue;
+    -fx-padding: 0px;
+    -fx-background-color: navy;
 }
 /*------------------------
     Title Label Styling
 -------------------------*/
 .app-title{
     -fx-font-family: pixelta;
-    -fx-font-size: 80px;
+    -fx-font-size: 70px;
     -fx-text-fill: steelblue;
 }
 /*------------------------------
     Big Menu Button Styling
 ------------------------------*/
 .big-button{
-    -fx-background-color: floralwhite;
+    -fx-background-color: lavender;
     -fx-background-radius: 15;
-    -fx-border-color: coral;
+    -fx-border-color: slateblue;
     -fx-border-width: 10;
     -fx-border-radius: 10;
     -fx-border-insets: 5;
@@ -48,8 +49,11 @@
     Game Box Styling
 -------------------------*/
 .game-button{
-    -fx-background-color: floralwhite;
-    -fx-padding: 4px;
+    -fx-background-color: midnightblue;
+    -fx-border-color: lavender;
+    -fx-border-width: 8px;
+    -fx-border-radius: 10px;
+    -fx-padding: 0px;
 }
 
 .button-content{ /* VBox contains everything inside of the game Button*/
@@ -60,12 +64,12 @@
     Box containers for nodes
 */
 .title-box{
-    -fx-background-color: indigo;
-    -fx-background-radius: 5;
+    -fx-background-color: black;
+    -fx-background-radius: 10px;
 }
 .author-box{
-    -fx-background-color: firebrick;
-    -fx-background-radius: 0px, 0px, 10px, 10px;
+    -fx-background-color: violet;
+    -fx-border-radius: 3px;
 }
 .release-box{
 
@@ -82,14 +86,49 @@
 
 .author-label{
     -fx-font-family: pixelta;
-    -fx-text-fill: snow;
+    -fx-text-fill: black;
     -fx-font-size: 25px;
 }
 .release-label{
     -fx-font-family: arcadeclassic;
-    -fx-text-fill: black;
+    -fx-text-fill: snow;
     -fx-font-size: 18px;
 }
+/*------------------
+    Belt Styling
+-------------------*/
+.gbs-belt{
+    -fx-background-color: plum;
+}
+.white-belt{
+    -fx-background-color: white;
+}
+.yellow-belt{
+    -fx-background-color: yellow;
+}
+.orange-belt{
+    -fx-background-color: orange;
+}
+.green-belt{
+    -fx-background-color: green;
+}
+.blue-belt{
+    -fx-background-color: blue;
+}
+.purple-belt{
+    -fx-background-color: purple;
+
+}
+.brown-belt{
+    -fx-background-color: brown;
+}
+.red-belt{
+    -fx-background-color: red;
+}
+.black-belt{
+    -fx-background-color: black;
+}
+
 .select{
 
 }

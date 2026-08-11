@@ -32,7 +32,7 @@ public class HelloApplication extends Application {
          */
         BorderPane root = new BorderPane();
         root.getStyleClass().add("root");
-        Scene scene = new Scene(root, 500, 500);
+        Scene scene = new Scene(root);
         scene.getStylesheets().add("StyleSheet.css");
         VBox mainBox = new VBox();
         mainBox.setSpacing(5);
@@ -97,6 +97,7 @@ public class HelloApplication extends Application {
         mainBox.setPadding(new Insets(20));
 
         stage.setTitle("Code Ninjas OV ARCADE");
+        stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
     }
@@ -113,14 +114,15 @@ public class HelloApplication extends Application {
 
 
         /*
-            Initizlizing all labels
+            Initizlizing all labels with their base Style classes
          */
         Label authorLabel = new Label(game.getAuthor());
-        Label releaseLabel = new Label("Published: " + game.getReleaseDate().toString());
-        Label titleLabel = new Label(game.getName());
-
         authorLabel.getStyleClass().add("author-label");
+
+        Label releaseLabel = new Label("Published: " + game.getReleaseDate().toString());
         releaseLabel.getStyleClass().add("release-label");
+
+        Label titleLabel = new Label(game.getName());
         titleLabel.getStyleClass().add("title-label");
 
 
@@ -137,6 +139,7 @@ public class HelloApplication extends Application {
         authorBox.getStyleClass().addAll("author-box");
 
         CreateGame workingGame = (CreateGame) game;
+
         switch(workingGame.getBeltColor()){
             case GBS -> authorBox.getStyleClass().add("gbs-belt");
             case WHITE -> authorBox.getStyleClass().add("white-belt");
@@ -148,9 +151,12 @@ public class HelloApplication extends Application {
             case BROWN -> authorBox.getStyleClass().add("brown-belt");
             case RED -> authorBox.getStyleClass().add("red-belt");
             case BLACK -> authorBox.getStyleClass().add("black-belt");
- }
+            default -> System.out.println("There is no color found here");
+        }
+
+
         authorBox.setAlignment(Pos.CENTER);
-        authorBox.setPrefSize(100,50);
+        authorBox.setPrefSize(110,50);
         authorBox.getChildren().addAll(authorLabel);
 
 

@@ -114,7 +114,11 @@ public class Controller {
             case "white" -> Belt.WHITE;
             case "yellow" -> Belt.YELLOW;
             case "orange" -> Belt.ORANGE;
+            case "green" -> Belt.GREEN;
             case "blue" -> Belt.BLUE;
+            case "red" -> Belt.RED;
+            case "brown" -> Belt.BROWN;
+            case "black" -> Belt.BLACK;
             default -> Belt.WHITE;
         };
     }
