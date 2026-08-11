@@ -39,7 +39,7 @@ public class HelloApplication extends Application {
         HBox buttonBox = new HBox();
 
         //setting Panes and Boxes with each other
-        Label appTitle = new Label("Code Ninjas Oro Valley");
+        Label appTitle = new Label("Code Ninjas Oro Valley ARCADE");
         appTitle.getStyleClass().add("app-title");
         mainBox.getChildren().addAll(appTitle,buttonBox);
         mainBox.setAlignment(Pos.TOP_CENTER);
@@ -96,7 +96,7 @@ public class HelloApplication extends Application {
         mainBox.getChildren().add(gameScroll);
         mainBox.setPadding(new Insets(20));
 
-        stage.setTitle("Code Ninjas OV");
+        stage.setTitle("Code Ninjas OV ARCADE");
         stage.setScene(scene);
         stage.show();
     }
@@ -108,26 +108,41 @@ public class HelloApplication extends Application {
         buttonGraphic.getStyleClass().add("game-box-content");
         buttonGraphic.setAlignment(Pos.TOP_CENTER);
         Label titleLabel = new Label(game.getName());
-
-        titleLabel.getStyleClass().add("thumbnail-title");
-        Label authorLabel = new Label(game.getAuthorString());
-        authorLabel.setAlignment(Pos.TOP_CENTER);
-
-        authorLabel.getStyleClass().add("thumbnail-author");
         VBox titleBox = new VBox();
         titleBox.getStyleClass().add("game-title-box");
-        titleBox.setPrefSize(110, 140);
+        titleBox.setPrefSize(150, 150);
         titleBox.getChildren().add(titleLabel);
         titleBox.setAlignment(Pos.CENTER);
 
 
+        Label authorLabel = new Label(game.getAuthorString());
+        Label releaseLabel = new Label("Published: " + game.getReleaseDate().toString());
+        VBox infoBox = new VBox();
+        infoBox.getStyleClass().add("game-info-box");
+        infoBox.setAlignment(Pos.TOP_CENTER);
+        infoBox.setPrefSize(100,50);
+        infoBox.getChildren().addAll(authorLabel);
+        VBox releaseBox = new VBox();
+        releaseBox.getStyleClass().add("game-release-box");
+        releaseBox.setAlignment(Pos.BOTTOM_LEFT);
+        releaseBox.setPrefSize(100,50);
+        releaseBox.getChildren().addAll(releaseLabel);
+        titleLabel.getStyleClass().add("thumbnail-title");
 
-        buttonGraphic.getChildren().addAll(titleBox,authorLabel);
-        Button result = new Button("");
-        result.setPrefSize(300, 230);
-        result.getStyleClass().add("game-button");
-        result.setGraphic(buttonGraphic);
-        return result;
+        authorLabel.setAlignment(Pos.TOP_CENTER);
+
+        authorLabel.getStyleClass().add("thumbnail-author");
+        releaseLabel.getStyleClass().add("thumbnail-release");
+
+
+
+
+        buttonGraphic.getChildren().addAll(titleBox,infoBox,releaseBox);
+        Button resultButton = new Button("");
+        resultButton.setPrefSize(300, 250);
+        resultButton.getStyleClass().add("game-button");
+        resultButton.setGraphic(buttonGraphic);
+        return resultButton;
 
 
     }

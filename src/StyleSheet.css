@@ -8,14 +8,15 @@
 }
 .game-title-box{
     -fx-background-color: black;
-    -fx-background-radius: 20;
+    -fx-background-radius: 5;
+
 }
 .big-button{
     -fx-background-color: lavender;
     -fx-background-radius: 15;
     -fx-border-color: slateblue;
     -fx-border-width: 10;
-    -fx-border-radius: 9;
+    -fx-border-radius: 10;
     -fx-border-insets: 5;
 
     -fx-text-fill: black;
@@ -25,26 +26,37 @@
 }
 
 .game-button{
-    -fx-background-color: lightgrey;
-    -fx-background-radius: 20;
+    -fx-background-color: aliceblue;
+    -fx-padding: 4px;
 }
 .game-box-content{
     -fx-background-color: transparent;
-    -fx-background-radius: 10;
+    -fx-background-radius: 10px;
     -fx-text-fill: snow;
+}
+.game-info-box{
+    -fx-background-color: dodgerblue;
+}
+.game-release-box{
+
 }
 
 .thumbnail-title{
     -fx-font-family: ARCADECLASSIC;
     -fx-font-color: snow;
-    -fx-font-size: 30px;
+    -fx-font-size: 25px;
     -fx-text-fill: snow;
 }
 
 .thumbnail-author{
-    -fx-font-family: ARCADECLASSIC;
+    -fx-font-family: pixelta;
     -fx-text-fill: black;
     -fx-font-size: 30px;
+}
+.thumbnail-release{
+    -fx-font-family: arcadeclassic;
+    -fx-text-fill: black;
+    -fx-font-size: 18px;
 }
 .scroll-pane{
    -fx-background-color: transparent;
