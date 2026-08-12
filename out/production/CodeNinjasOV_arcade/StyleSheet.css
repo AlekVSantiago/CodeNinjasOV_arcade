@@ -55,6 +55,10 @@
     -fx-border-radius: 10px;
     -fx-padding: 0px;
 }
+.game-button-highlight{
+    -fx-background-color: beige;
+    -fx-border-color: black;
+}
 
 .button-content{ /* VBox contains everything inside of the game Button*/
     -fx-background-color: transparent;
@@ -67,12 +71,21 @@
     -fx-background-color: black;
     -fx-background-radius: 10px;
 }
+.title-box-highlight{
+    -fx-background-color: white;
+}
 .author-box{
     -fx-background-color: violet;
     -fx-border-radius: 3px;
 }
+.author-box-highlight{
+    -fx-background-color: snow;
+}
+.author-box-highlight-white{
+    -fx-background-color: grey;
+}
 .release-box{
-
+    -fx-background-color: transparent;
 }
 /*--------------------
     Label Styling
@@ -89,10 +102,38 @@
     -fx-text-fill: black;
     -fx-font-size: 25px;
 }
+author-label-white{
+    -fx-text-fill: white;
+}
+author-label-yellow{
+    -fx-text-fill: yellow;
+}
+author-label-orange{
+    -fx-text-fill: orange;
+}
+author-label-green{
+    -fx-text-fill: green;
+}
+author-label-blue{
+    -fx-text-fill: blue;
+}
+author-label-red{
+    -fx-text-fill: red;
+}
+author-label-brown{
+    -fx-text-fill: brown;
+}
+author-label-black{
+    -fx-text-fill: black;
+}
+
 .release-label{
-    -fx-font-family: arcadeclassic;
+    -fx-font-family: pixelta;
     -fx-text-fill: snow;
     -fx-font-size: 18px;
+}
+.release-label-highlight{
+    -fx-text-fill: black;
 }
 /*------------------
     Belt Styling
@@ -128,9 +169,13 @@
 .black-belt{
     -fx-background-color: black;
 }
+.belt-highlight{
+    -fx-background: black;
 
-.select{
+}
 
+.selected{
+    -fx
 }
 .unselected{
 

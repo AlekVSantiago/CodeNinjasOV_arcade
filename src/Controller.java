@@ -34,11 +34,11 @@ public class Controller {
         if (scanner.hasNextLine()) {
             scanner.nextLine();
         }
-        ArrayList<Game> library = new ArrayList<>();
-        ArrayList<Game> resultQuest = new ArrayList<>();
-        ArrayList<Game> resultFreestyle = new ArrayList<>();
-        ArrayList<Game> resultGbs = new ArrayList<>();
-        ArrayList<Game> resultSensei = new ArrayList<>();
+        ArrayList<CreateGame> library = new ArrayList<>();
+        ArrayList<CreateGame> resultQuest = new ArrayList<>();
+        ArrayList<CreateGame> resultFreestyle = new ArrayList<>();
+        ArrayList<CreateGame> resultGbs = new ArrayList<>();
+        ArrayList<CreateGame> resultSensei = new ArrayList<>();
         String[] currentLineArr;
         while (scanner.hasNextLine()) {
             currentLine = scanner.nextLine();
@@ -74,16 +74,18 @@ public class Controller {
         }
         return new Model(library, resultQuest, resultFreestyle, resultGbs, resultSensei, Theme.NEUTRAL);
     }
-    public ArrayList<Game> dateSort(ArrayList<Game> inputArr){
-        ArrayList<Game> result = new ArrayList<>();
+    /*
+        Sorting Algorithms
+     */
+    public static ArrayList<CreateGame> dateSort(ArrayList<CreateGame> inputArr){
+        ArrayList<CreateGame> result = new ArrayList<>();
         if(inputArr.size() == 1){
-            result.add(inputArr.get(0));
-            return result;
+            return inputArr;
         }else{
             int mid = inputArr.size() / 2;
-            ArrayList<Game> firstHalf = new ArrayList<>(inputArr.subList(0, mid));
+            ArrayList<CreateGame> firstHalf = new ArrayList<>(inputArr.subList(0, mid));
             firstHalf = dateSort(firstHalf);
-            ArrayList<Game> secondHalf = new ArrayList<>(inputArr.subList(mid, inputArr.size()));
+            ArrayList<CreateGame> secondHalf = new ArrayList<>(inputArr.subList(mid, inputArr.size()));
 
             secondHalf = dateSort(secondHalf);
             int inputIndex = 0;
@@ -108,10 +110,10 @@ public class Controller {
         }
         return result;
     }
-    public ArrayList<CreateGame> beltSort(ArrayList<CreateGame> inputArr){
-        ArrayList<CreateGame> result = inputArr;
-        if(result.size() == 1){
-            return result;
+    public static ArrayList<CreateGame> beltSort(ArrayList<CreateGame> inputArr){
+        ArrayList<CreateGame> result = new ArrayList<>();
+        if(inputArr.size() == 1){
+            return inputArr;
         }
         else{
             int mid = inputArr.size() / 2;
@@ -141,6 +143,59 @@ public class Controller {
         }
         return result;
 
+    }
+    public static ArrayList<CreateGame> nameSort(ArrayList<CreateGame> inputArr){
+        ArrayList<CreateGame> result = inputArr;
+        if(result.size() == 1){
+            return result;
+        }else{
+            int mid = inputArr.size() / 2;
+            ArrayList<CreateGame> firstHalf = new ArrayList<>(inputArr.subList(0, mid));
+            firstHalf = nameSort(firstHalf);
+            ArrayList<CreateGame> secondHalf = new ArrayList<>(inputArr.subList(mid, inputArr.size()));
+            secondHalf = nameSort(secondHalf);
+
+            int inputIndex = 0;
+            int returnIndex = 0;
+            while(inputIndex < firstHalf.size() && returnIndex < secondHalf.size()){
+                if(firstHalf.get(inputIndex).getAuthor().compareTo(secondHalf.get(returnIndex).getAuthor()) < 0){
+                    result.add(firstHalf.get(inputIndex));
+                    inputIndex++;
+                }
+                else{
+                    result.add(secondHalf.get(returnIndex));
+                    returnIndex++;
+                }
+            }
+            for(int i = returnIndex; i < secondHalf.size(); i++){
+                result.add(secondHalf.get(i));
+            }
+            for(int i = inputIndex; i < firstHalf.size(); i++){
+                result.add(firstHalf.get(i));
+            }
+        }
+        return result;
+    }
+    public void sortAllBelt(){
+        this.getModel().setLibrary(beltSort(this.getModel().getLibrary()));
+        this.getModel().setQuestGames(beltSort(this.getModel().getQuestGames()));
+        this.getModel().setFreestyleGames(beltSort(this.getModel().getFreestyleGames()));
+        this.getModel().setSenseiGames(beltSort(this.getModel().getSenseiGames()));
+        this.getModel().setGbsGames(beltSort(this.getModel().getGbsGames()));
+    }
+    public void sortAllName(){
+        this.getModel().setLibrary(nameSort(this.getModel().getLibrary()));
+        this.getModel().setQuestGames(nameSort(this.getModel().getQuestGames()));
+        this.getModel().setFreestyleGames(nameSort(this.getModel().getFreestyleGames()));
+        this.getModel().setSenseiGames(nameSort(this.getModel().getSenseiGames()));
+        this.getModel().setGbsGames(nameSort(this.getModel().getGbsGames()));
+    }
+    public void sortAllDate(){
+        this.getModel().setLibrary(dateSort(this.getModel().getLibrary()));
+        this.getModel().setQuestGames(dateSort(this.getModel().getQuestGames()));
+        this.getModel().setFreestyleGames(dateSort(this.getModel().getFreestyleGames()));
+        this.getModel().setSenseiGames(dateSort(this.getModel().getSenseiGames()));
+        this.getModel().setGbsGames(dateSort(this.getModel().getGbsGames()));
     }
     public Template readTemplate(String s) throws Exception {
             return switch (s.toLowerCase()) {

@@ -5,21 +5,21 @@ public class Model {
         Fields
         all of the lists and such
      -------------------------*/
-    private ArrayList<Game> library;
-    private ArrayList<Game> questGames;
-    private ArrayList<Game> freestyleGames;
-    private ArrayList<Game> gbsGames;
-    private ArrayList<Game> senseiGames;
+    private ArrayList<CreateGame> library;
+    private ArrayList<CreateGame> questGames;
+    private ArrayList<CreateGame> freestyleGames;
+    private ArrayList<CreateGame> gbsGames;
+    private ArrayList<CreateGame> senseiGames;
     private Theme theme;
 
     /*---------------------
         Constructor
      -------------------------*/
-    Model(ArrayList<Game> library,
-          ArrayList<Game> questGames,
-          ArrayList<Game> freestyleGames,
-          ArrayList<Game> gbsGames,
-          ArrayList<Game> senseiGames,
+    Model(ArrayList<CreateGame> library,
+          ArrayList<CreateGame> questGames,
+          ArrayList<CreateGame> freestyleGames,
+          ArrayList<CreateGame> gbsGames,
+          ArrayList<CreateGame> senseiGames,
           Theme theme){
         this.library = library;
         this.questGames = questGames;
@@ -40,41 +40,41 @@ public class Model {
         this.theme = theme;
     }
 
-    public ArrayList<Game> getLibrary() {
+    public ArrayList<CreateGame> getLibrary() {
         return library;
     }
 
-    public void setLibrary(ArrayList<Game> library) {
+    public void setLibrary(ArrayList<CreateGame> library) {
         this.library = library;
     }
 
-    public ArrayList<Game> getQuestGames() {
+    public ArrayList<CreateGame> getQuestGames() {
         return questGames;
     }
 
-    public void setQuestGames(ArrayList<Game> questGames) {
+    public void setQuestGames(ArrayList<CreateGame> questGames) {
         this.questGames = questGames;
     }
-    public ArrayList<Game> getFreestyleGames(){
+    public ArrayList<CreateGame> getFreestyleGames(){
         return this.freestyleGames;
     }
-    public void setFreestyleGames(ArrayList<Game> freestyleGames){
+    public void setFreestyleGames(ArrayList<CreateGame> freestyleGames){
         this.freestyleGames = freestyleGames;
     }
 
-    public ArrayList<Game> getGbsGames() {
+    public ArrayList<CreateGame> getGbsGames() {
         return gbsGames;
     }
 
-    public void setGbsGames(ArrayList<Game> gbsGames) {
+    public void setGbsGames(ArrayList<CreateGame> gbsGames) {
         this.gbsGames = gbsGames;
     }
 
-    public ArrayList<Game> getSenseiGames() {
+    public ArrayList<CreateGame> getSenseiGames() {
         return this.senseiGames;
     }
 
-    public void setSenseiGames(ArrayList<Game> senseiGames) {
+    public void setSenseiGames(ArrayList<CreateGame> senseiGames) {
         this.senseiGames = senseiGames;
     }
 

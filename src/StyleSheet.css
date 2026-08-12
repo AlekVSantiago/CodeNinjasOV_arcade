@@ -55,6 +55,10 @@
     -fx-border-radius: 10px;
     -fx-padding: 0px;
 }
+.game-button-highlight{
+    -fx-background-color: beige;
+    -fx-border-color: black;
+}
 
 .button-content{ /* VBox contains everything inside of the game Button*/
     -fx-background-color: transparent;
@@ -67,12 +71,21 @@
     -fx-background-color: black;
     -fx-background-radius: 10px;
 }
+.title-box-highlight{
+    -fx-background-color: white;
+}
 .author-box{
     -fx-background-color: violet;
     -fx-border-radius: 3px;
 }
+.author-box-highlight{
+    -fx-background-color: snow;
+}
+.author-box-highlight-white{
+    -fx-background-color: grey;
+}
 .release-box{
-
+    -fx-background-color: transparent;
 }
 /*--------------------
     Label Styling
