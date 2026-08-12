@@ -89,10 +89,38 @@
     -fx-text-fill: black;
     -fx-font-size: 25px;
 }
+author-label-white{
+    -fx-text-fill: white;
+}
+author-label-yellow{
+    -fx-text-fill: yellow;
+}
+author-label-orange{
+    -fx-text-fill: orange;
+}
+author-label-green{
+    -fx-text-fill: green;
+}
+author-label-blue{
+    -fx-text-fill: blue;
+}
+author-label-red{
+    -fx-text-fill: red;
+}
+author-label-brown{
+    -fx-text-fill: brown;
+}
+author-label-black{
+    -fx-text-fill: black;
+}
+
 .release-label{
-    -fx-font-family: arcadeclassic;
+    -fx-font-family: pixelta;
     -fx-text-fill: snow;
     -fx-font-size: 18px;
+}
+.release-label-highlight{
+    -fx-text-fill: black;
 }
 /*------------------
     Belt Styling
@@ -128,9 +156,13 @@
 .black-belt{
     -fx-background-color: black;
 }
+.belt-highlight{
+    -fx-background: black;
 
-.select{
+}
 
+.selected{
+    -fx
 }
 .unselected{
 

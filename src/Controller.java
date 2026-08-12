@@ -1,4 +1,5 @@
 import java.io.File;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,7 +74,74 @@ public class Controller {
         }
         return new Model(library, resultQuest, resultFreestyle, resultGbs, resultSensei, Theme.NEUTRAL);
     }
+    public ArrayList<Game> dateSort(ArrayList<Game> inputArr){
+        ArrayList<Game> result = new ArrayList<>();
+        if(inputArr.size() == 1){
+            result.add(inputArr.get(0));
+            return result;
+        }else{
+            int mid = inputArr.size() / 2;
+            ArrayList<Game> firstHalf = new ArrayList<>(inputArr.subList(0, mid));
+            firstHalf = dateSort(firstHalf);
+            ArrayList<Game> secondHalf = new ArrayList<>(inputArr.subList(mid, inputArr.size()));
 
+            secondHalf = dateSort(secondHalf);
+            int inputIndex = 0;
+            int returnIndex = 0;
+            while(inputIndex < firstHalf.size() && returnIndex < secondHalf.size()){
+                if(firstHalf.get(inputIndex).getReleaseDate().isBefore(
+                        secondHalf.get(returnIndex).getReleaseDate())){
+                    result.add(firstHalf.get(inputIndex));
+                    inputIndex++;
+                }
+                else{
+                    result.add(secondHalf.get(returnIndex));
+                    returnIndex++;
+                }
+            }
+            for(int i = returnIndex; i < secondHalf.size(); i++){
+                result.add(secondHalf.get(i));
+            }
+            for(int i = inputIndex; i < firstHalf.size(); i++){
+                result.add(firstHalf.get(i));
+            }
+        }
+        return result;
+    }
+    public ArrayList<CreateGame> beltSort(ArrayList<CreateGame> inputArr){
+        ArrayList<CreateGame> result = inputArr;
+        if(result.size() == 1){
+            return result;
+        }
+        else{
+            int mid = inputArr.size() / 2;
+            ArrayList<CreateGame> firstHalf = new ArrayList<>(inputArr.subList(0, mid));
+            firstHalf = beltSort(firstHalf);
+            ArrayList<CreateGame> secondHalf = new ArrayList<>(inputArr.subList(mid, inputArr.size()));
+            secondHalf = beltSort(secondHalf);
+
+            int inputIndex = 0;
+            int returnIndex = 0;
+
+            while(inputIndex < firstHalf.size() && returnIndex < secondHalf.size()){
+                if(firstHalf.get(inputIndex).getBeltColor().getBeltNum() < secondHalf.get(returnIndex).getBeltColor().getBeltNum()){
+                    result.add(firstHalf.get(inputIndex));
+                    inputIndex++;
+                }else{
+                    result.add(secondHalf.get(returnIndex));
+                    returnIndex++;
+                }
+            }
+            for(int i = returnIndex; i < secondHalf.size(); i++){
+                result.add(secondHalf.get(i));
+            }
+            for(int i = inputIndex; i < firstHalf.size(); i++){
+                result.add(firstHalf.get(i));
+            }
+        }
+        return result;
+
+    }
     public Template readTemplate(String s) throws Exception {
             return switch (s.toLowerCase()) {
             case "invaders" -> Template.INVADERS;
