@@ -1,32 +1,52 @@
 /*-----------------------------
     Application base Styling
 ------------------------------*/
+.my-node {
+    -fx-background-image: url("/Users/aleksantiago/Desktop/codeNinjas/CodeNinjasOV_arcade/src/imgAssets/blueChecker.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
 .root{
     -fx-padding: 0px;
+    -fx-background-color: lightskyblue;
+}
+.main-box{
     -fx-background-color: navy;
+}
+.top-box{
+    -fx-background-color: lightskyblue;
+    -fx-padding: 0 0 10 30;
+    -fx-background-radius: 30;
+    -fx-border-width: 10;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
 }
 /*------------------------
     Title Label Styling
 -------------------------*/
 .app-title{
-    -fx-font-family: pixelta;
-    -fx-font-size: 70px;
-    -fx-text-fill: steelblue;
+    -fx-font-family: tradegothic;
+    -fx-font-weight: bold;
+    -fx-font-size: 60px;
+    -fx-text-fill: white;
 }
+
 /*------------------------------
     Big Menu Button Styling
 ------------------------------*/
 .big-button{
-    -fx-background-color: lavender;
-    -fx-background-radius: 15;
-    -fx-border-color: slateblue;
-    -fx-border-width: 10;
-    -fx-border-radius: 10;
-    -fx-border-insets: 5;
+    -fx-background-color: #fff3c2;
+    -fx-background-radius: 100;
+    -fx-border-color: black;
+    -fx-border-width: 7;
+    -fx-background-insets: 5;
+    -fx-border-radius: 70;
 
     -fx-text-fill: black;
-    -fx-font-family: arcadeclassic;
-    -fx-font-size: 30px;
+    -fx-font-family: mumbossk;
+
+    -fx-font-size: 25px;
 
 }
 /*-------------------------
@@ -36,7 +56,6 @@
    -fx-background-color: transparent;
        -fx-background: transparent;
        -fx-border-color: transparent;
-       -fx-padding: 0;
 }
 .scroll-pane .scroll-bar:vertical {
     -fx-opacity: 0;
@@ -48,135 +67,91 @@
 /*-----------------------
     Game Box Styling
 -------------------------*/
-.game-button{
-    -fx-background-color: midnightblue;
-    -fx-border-color: lavender;
-    -fx-border-width: 8px;
-    -fx-border-radius: 10px;
-    -fx-padding: 0px;
-}
-.game-button-highlight{
-    -fx-background-color: beige;
+.content-box{
     -fx-border-color: black;
+    -fx-border-width: 10px;
+    -fx-border-radius: 40px;
+    -fx-background-radius: 50px;
 }
-
-.button-content{ /* VBox contains everything inside of the game Button*/
-    -fx-background-color: transparent;
-    -fx-background-radius: 10px;
-}
-/*
-    Box containers for nodes
-*/
-.title-box{
-    -fx-background-color: black;
-    -fx-background-radius: 10px;
-}
-.title-box-highlight{
-    -fx-background-color: white;
-}
-.author-box{
-    -fx-background-color: violet;
-    -fx-border-radius: 3px;
-}
-.author-box-highlight{
-    -fx-background-color: snow;
-}
-.author-box-highlight-white{
-    -fx-background-color: grey;
-}
-.release-box{
-    -fx-background-color: transparent;
-}
-/*--------------------
-    Label Styling
-----------------------*/
-.title-label{
-    -fx-font-family: ARCADECLASSIC;
-    -fx-font-color: snow;
-    -fx-font-size: 25px;
-    -fx-text-fill: snow;
-}
-
-.author-label{
-    -fx-font-family: pixelta;
+.labels{
     -fx-text-fill: black;
-    -fx-font-size: 25px;
-}
-author-label-white{
-    -fx-text-fill: white;
-}
-author-label-yellow{
-    -fx-text-fill: yellow;
-}
-author-label-orange{
-    -fx-text-fill: orange;
-}
-author-label-green{
-    -fx-text-fill: green;
-}
-author-label-blue{
-    -fx-text-fill: blue;
-}
-author-label-red{
-    -fx-text-fill: red;
-}
-author-label-brown{
-    -fx-text-fill: brown;
-}
-author-label-black{
-    -fx-text-fill: black;
-}
-
-.release-label{
-    -fx-font-family: pixelta;
-    -fx-text-fill: snow;
-    -fx-font-size: 18px;
-}
-.release-label-highlight{
-    -fx-text-fill: black;
-}
-/*------------------
-    Belt Styling
--------------------*/
-.gbs-belt{
-    -fx-background-color: plum;
+    -fx-font-family: mumbossk;
 }
 .white-belt{
-    -fx-background-color: white;
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #ffffff;
 }
 .yellow-belt{
-    -fx-background-color: yellow;
+    -fx-background-color: #fff3c2;
+    -fx-text-fill: #ffef82;
 }
 .orange-belt{
-    -fx-background-color: orange;
+    -fx-background-color: #ff914d;
+    -fx-text-fill: #ff914d;
 }
 .green-belt{
-    -fx-background-color: green;
+    -fx-background-color: #00bf63;
+    -fx-text-fill: #00bf63;
 }
 .blue-belt{
-    -fx-background-color: blue;
+    -fx-background-color: #70cbff;
+    -fx-text-fill: lightskyblue;
 }
 .purple-belt{
     -fx-background-color: purple;
-
+    -fx-text-fill: purple;
 }
 .brown-belt{
-    -fx-background-color: brown;
+    -fx-background-color: #cc7a00;
+    -fx-text-fill: #cc7a00;
 }
 .red-belt{
-    -fx-background-color: red;
+    -fx-background-color: #ff9999;
+    -fx-text-fill: orangered;
 }
 .black-belt{
-    -fx-background-color: black;
+    -fx-background-color: #545454;
+    -fx-text-fill: white;
 }
-.belt-highlight{
-    -fx-background: black;
+.label-black{
+    -fx-text-fill: #ffffff;
+}
+.author{
+    -fx-font-family: tradegothic;
+    -fx-font-size: 15px;
+}
+.name{
+    -fx-font-family: tradegothic;
+    -fx-font-weight: bold;
+    -fx-font-size: 23px;
+    -fx-wrap-text: true;
+}
+.release{
+    -fx-text-size: 12px;
+}
+.rectangle{
+    -fx-fill: black;
+}
+.highlighted{
+    -fx-border-color: #ffdE59; /* Yellow color */
+    -fx-background-color: red;
 
 }
-
-.selected{
-    -fx
+.white-highlight{
 }
-.unselected{
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

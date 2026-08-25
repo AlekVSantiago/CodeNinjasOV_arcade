@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Model {
@@ -10,6 +11,7 @@ public class Model {
     private ArrayList<CreateGame> freestyleGames;
     private ArrayList<CreateGame> gbsGames;
     private ArrayList<CreateGame> senseiGames;
+    private ArrayList<CreateGame> currGames;
     private Theme theme;
 
     /*---------------------
@@ -26,7 +28,9 @@ public class Model {
         this.freestyleGames = freestyleGames;
         this.gbsGames = gbsGames;
         this.senseiGames = senseiGames;
+        this.currGames = senseiGames;
         this.theme = theme;
+
     }
 
     /*---------------------
@@ -78,5 +82,12 @@ public class Model {
         this.senseiGames = senseiGames;
     }
 
+    public ArrayList<CreateGame> getCurrGames() {
+        return currGames;
+    }
+
+    public void setCurrGames(ArrayList<CreateGame> currGames) {
+        this.currGames = currGames;
+    }
 }
 

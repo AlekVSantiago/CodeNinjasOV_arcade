@@ -1,8 +1,10 @@
+import java.awt.*;
 import java.io.File;
-import java.lang.reflect.Array;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class Controller {
@@ -253,5 +255,9 @@ public class Controller {
             case "sensei" -> Type.SENSEI;
             default -> throw new Exception("Type Cannot be found");
         };
+    }
+    public void selectGame(int currRow, int currCol, ArrayList<CreateGame> currGames) throws URISyntaxException, IOException {
+        System.out.println("Now Playing " + currGames.get(currRow * 5 + currCol).getName());
+        Desktop.getDesktop().browse(new URI(currGames.get(currRow * 5 + currCol).getUrl()));
     }
 }

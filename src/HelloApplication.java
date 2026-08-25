@@ -2,24 +2,31 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-import java.lang.reflect.Array;
+import javafx.scene.shape.Rectangle;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class HelloApplication extends Application {
+    ArrayList<ArrayList<VBox>> gameBoxArr = new ArrayList<ArrayList<VBox>>();
+    GridPane workingGrid;
+    int rowNumber; // Number of rows that the current gridPane has for reference
+    int currRow = 0;
+    int currCol = 0;
+
     public void start(Stage stage) throws Exception {
         Font.loadFont(getClass().getResourceAsStream("src/fonts/ARCADECLASSIC.TTF"), 18);
         Font.loadFont(getClass().getResourceAsStream("src/fonts/ka1.ttf"), 18);
         Controller controller = new Controller();
-        int column = 3;
-        AtomicInteger selectIndex = new AtomicInteger();
-        ArrayList<VBox> gameBoxArr = new ArrayList<>();
+        int column = 4;
+
 
         /* 1--------------------------
             INITIALIZING ALL UI COMPONENTS
@@ -33,15 +40,22 @@ public class HelloApplication extends Application {
         root.getStyleClass().add("root");
         Scene scene = new Scene(root);
         scene.getStylesheets().add("StyleSheet.css");
+        root.getStylesheets().add("my-node");
         VBox mainBox = new VBox();
-        mainBox.setSpacing(5);
+        VBox topBox = new VBox();
+        mainBox.setSpacing(0);
+        mainBox.getStyleClass().add("main-box");
+        topBox.getStyleClass().add("top-box");
+        topBox.setSpacing(20);
+        VBox.setMargin(topBox, new Insets(20, 15, 0, 15));
         HBox buttonBox = new HBox();
 
         //setting Panes and Boxes with each other
-        Label appTitle = new Label("Code Ninjas Oro Valley ARCADE");
+        Label appTitle = new Label("Code Ninjas ARCADE");
         appTitle.getStyleClass().add("app-title");
-        mainBox.getChildren().addAll(appTitle,buttonBox);
-        mainBox.setAlignment(Pos.TOP_CENTER);
+        topBox.getChildren().addAll(appTitle, buttonBox);
+        mainBox.getChildren().addAll(topBox);
+        mainBox.setAlignment(Pos.TOP_LEFT);
         root.setCenter(mainBox);
 
 
@@ -56,8 +70,10 @@ public class HelloApplication extends Application {
                 scrollPane.setVvalue(scrollPane.getVvalue() - 0.1); // scroll up
 
 
+
                 ----------------KeyCode Pressing and releasing---------------------
                 boolean isHeld = false;
+
 
                 ----------------Scrolling the ScrolePane with controls-------------
                boolean isHeld = false;
@@ -77,102 +93,88 @@ public class HelloApplication extends Application {
         /*
         Button Tabs Collection
          */
-        Button questBtn = new Button("QUEST");
-        questBtn.setMinSize(180, 80);
+        Button questBtn = new Button("ADVENTURE");
+        questBtn.setPrefSize(180, 110);
         questBtn.getStyleClass().add("big-button");
-        Button freeBtn = new Button("FREESTYLE");
-        freeBtn.setMinSize(180, 80);
+        Button freeBtn = new Button("SANDBOX");
+        freeBtn.setPrefSize(180, 110);
         freeBtn.getStyleClass().add("big-button");
-        Button buildBtn = new Button("GAME BUILDING SESSION");
-        buildBtn.setMinSize(180, 80);
+        Button buildBtn = new Button("Game Build Session");
+        buildBtn.setPrefSize(300, 110);
         buildBtn.getStyleClass().add("big-button");
         Button senseiBtn = new Button("SENSEI");
-        senseiBtn.setMinSize( 180, 80);
+        senseiBtn.setPrefSize(180, 110);
         senseiBtn.getStyleClass().add("big-button");
         Button workingBtn = questBtn;
         workingBtn.getStyleClass().add("big-button");
         buttonBox.getChildren().addAll(questBtn, freeBtn, buildBtn, senseiBtn);
-
-        buttonBox.setSpacing(20);
-        buttonBox.setPadding(new Insets(10, 20, 20, 20));
+        buttonBox.setSpacing(40);
         buttonBox.setAlignment(Pos.TOP_CENTER);
 
-        /*
-        GridPane Initialization
-         */
-        GridPane questGrid = populateGrid(controller.getModel().getQuestGames(), column);
-        questGrid.setHgap(40);
-        questGrid.setVgap(20);
-        GridPane freeGrid = populateGrid(controller.getModel().getFreestyleGames(), column);
-        freeGrid.setHgap(40);
-        freeGrid.setVgap(20);
-        GridPane buildGrid = populateGrid(controller.getModel().getGbsGames(), column);
-        buildGrid.setHgap(40);
-        buildGrid.setVgap(20);
-        GridPane senseiGrid = populateGrid(Controller.beltSort(controller.getModel().getSenseiGames()), column);
-        //GridPane senseiGrid = populateGrid(controller.getModel().getSenseiGames());
-        senseiGrid.setAlignment(Pos.TOP_CENTER);
-        senseiGrid.setHgap(60);
-        senseiGrid.setVgap(20);
-        GridPane workingGrid = senseiGrid;
+
+        populateGrid(controller.getModel().getCurrGames(), column);
 
         ScrollPane gameScroll = new ScrollPane(workingGrid);
         gameScroll.setFitToWidth(true);
+        gameScroll.setFitToHeight(true);
+
         mainBox.getChildren().add(gameScroll);
-        mainBox.setPadding(new Insets(20));
+        mainBox.setPadding(new Insets(0));
+        mainBox.setSpacing(0);
 
+
+        /*
+            Here is where I am going to test some of the event handling
+         */
         scene.setOnKeyPressed(event -> {
-            switch(event.getCode()) {
-                case W -> {
-                    gameBoxArr.get(selectIndex.get()).getStyleClass().remove(1);
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(0).getStyleClass().remove(1);
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(1).getStyleClass().remove(1);
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(2).getStyleClass().remove(1);
-                    selectIndex.addAndGet(-column);
-                    gameBoxArr.get(selectIndex.get()).getStyleClass().add("game-button-highlight");
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(0).getStyleClass().add("title-box-highlight");
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(1).getStyleClass().add("author-box-highlight");
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(2).getStyleClass().add("release-box-highlight");
-                }
-                case A ->   {
-                    gameBoxArr.get(selectIndex.get()).getStyleClass().remove(1);
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(0).getStyleClass().remove(1);
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(1).getStyleClass().remove(1);
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(2).getStyleClass().remove(1);
-                    selectIndex.addAndGet(-1);
-                    gameBoxArr.get(selectIndex.get()).getStyleClass().add("game-button-highlight");
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(0).getStyleClass().add("title-box-highlight");
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(1).getStyleClass().add("author-box-highlight");
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(2).getStyleClass().add("release-box-highlight");
+            System.out.println(event.getCode());
+            System.out.println("(" + currRow + ", " + currCol + ")");
+            switch(event.getCode()){
+                case W:
+                    if(currRow > 0){
+                        this.gameBoxArr.get(currRow).get(currCol).getStyleClass().remove("highlighted");
+                        currRow--;
+                        this.gameBoxArr.get(currRow).get(currCol).getStyleClass().add("highlighted");
+                    }
+                    break;
 
-                }
-                case S -> {
 
-                    gameBoxArr.get(selectIndex.get()).getStyleClass().remove(1);
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(0).getStyleClass().remove(1);
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(1).getStyleClass().remove(1);
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(2).getStyleClass().remove(1);
-                    selectIndex.addAndGet(+column);
-                    gameBoxArr.get(selectIndex.get()).getStyleClass().add("game-button-highlight");
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(0).getStyleClass().add("title-box-highlight");
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(1).getStyleClass().add("author-box-highlight");
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(2).getStyleClass().add("release-box-highlight");
-                }
-                case D -> {
+                case A:
+                    if(currCol > 0){
+                        this.gameBoxArr.get(currRow).get(currCol).getStyleClass().remove("highlighted");
+                        currCol--;
+                        this.gameBoxArr.get(currRow).get(currCol).getStyleClass().add("highlighted");
+                    }
+                    break;
+                case D:
+                    if(currCol < 4) {
+                        this.gameBoxArr.get(currRow).get(currCol).getStyleClass().remove("highlighted");
+                        currCol++;
+                        this.gameBoxArr.get(currRow).get(currCol).getStyleClass().add("highlighted");
 
-                    gameBoxArr.get(selectIndex.get()).getStyleClass().remove(1);
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(0).getStyleClass().remove(1);
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(1).getStyleClass().remove(1);
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(2).getStyleClass().remove(1);
-                    selectIndex.addAndGet(+1);
-                    gameBoxArr.get(selectIndex.get()).getStyleClass().add("game-button-highlight");
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(0).getStyleClass().add("title-box-highlight");
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(1).getStyleClass().add("author-box-highlight");
-                    gameBoxArr.get(selectIndex.get()).getChildren().get(2).getStyleClass().add("release-box-highlight");
-
-                }
+                    }
+                    break;
+                case S:
+                    if(currRow < 3){
+                        this.gameBoxArr.get(currRow).get(currCol).getStyleClass().remove("highlighted");
+                        currRow++;
+                        this.gameBoxArr.get(currRow).get(currCol).getStyleClass().add("highlighted");
+                    }
+                    break;
+                case Z:
+                    try {
+                        controller.selectGame(currRow, currCol, controller.getModel().getCurrGames());
+                    } catch (URISyntaxException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
             }
         });
+
+
+
+
         stage.setTitle("Code Ninjas OV ARCADE");
         stage.setFullScreen(true);
         stage.setScene(scene);
@@ -181,103 +183,98 @@ public class HelloApplication extends Application {
     /*
     This will create the thumbnail GUI to represent the Game
      */
-    public VBox thumbnailBuilder(Game game){
+    public VBox thumbnailBuilder(CreateGame game){
         /*
-        The button container that has everything
+            Initializing all components
          */
-        VBox buttonGraphic = new VBox();
-        buttonGraphic.setPrefSize(300, 250);
-        buttonGraphic.getStyleClass().add("content-box");
-        buttonGraphic.setAlignment(Pos.TOP_CENTER);
+        VBox contentBox = new VBox(); //Main box that everything is in
+        VBox topLabelBox = new VBox();
+        VBox bottomLabelBox = new VBox();
+
+        Label authorLabel = new Label(game.getAuthor().replace("-", " ") + "'s");
+        Label nameLabel = new Label(game.getName().replace("-", " "));
+        Label releaseLabel = new Label(game.getReleaseDate().toString());
+        Rectangle recPicture = new Rectangle(200, 130);
+        recPicture.getStyleClass().add("rectangle");
+
+        contentBox.setMinSize(260, 300);
+        contentBox.setMaxSize(260, 300);
+        contentBox.setSpacing(20);
+        contentBox.setAlignment(Pos.CENTER);
+        topLabelBox.setAlignment(Pos.BOTTOM_LEFT);
+        topLabelBox.setSpacing(0);
+
+
+        VBox.setMargin(topLabelBox, new Insets(5, 0, 0, 7));
+        VBox.setMargin(bottomLabelBox, new Insets(0, 0, 0, 7));
+
+        bottomLabelBox.setAlignment(Pos.TOP_LEFT);
+
 
 
         /*
-            Initizlizing all labels with their base Style classes
+            Initialize Styling
          */
-        Label authorLabel = new Label(game.getAuthor());
-        authorLabel.getStyleClass().add("author-label");
-
-        Label releaseLabel = new Label("Published: " + game.getReleaseDate().toString());
-        releaseLabel.getStyleClass().add("release-label");
-
-        Label titleLabel = new Label(game.getName());
-        titleLabel.getStyleClass().add("title-label");
-
-
-        VBox titleBox = new VBox();
-        titleBox.getStyleClass().add("title-box");
-        titleBox.setPrefSize(150, 150);
-        titleBox.getChildren().add(titleLabel);
-        titleBox.setAlignment(Pos.CENTER);
-
-        /*
-            authorBox
-         */
-        VBox authorBox = new VBox();
-        authorBox.getStyleClass().addAll("author-box");
-
-        CreateGame workingGame = (CreateGame) game;
-
-        switch(workingGame.getBeltColor()){
-            case GBS -> authorBox.getStyleClass().add("gbs-belt");
-            case WHITE -> authorBox.getStyleClass().add("white-belt");
-            case YELLOW -> authorBox.getStyleClass().add("yellow-belt");
-            case ORANGE -> authorBox.getStyleClass().add("orange-belt");
-            case GREEN -> authorBox.getStyleClass().add("green-belt");
-            case BLUE -> authorBox.getStyleClass().add("blue-belt");
-            case PURPLE -> authorBox.getStyleClass().add("purple-belt");
-            case BROWN -> authorBox.getStyleClass().add("brown-belt");
-            case RED -> authorBox.getStyleClass().add("red-belt");
-            case BLACK -> authorBox.getStyleClass().add("black-belt");
-            default -> System.out.println("There is no color found here");
+        contentBox.getStyleClass().add("content-box");
+        switch (game.getBeltColor()){
+            case WHITE -> contentBox.getStyleClass().add("white-belt");
+            case YELLOW -> contentBox.getStyleClass().add("yellow-belt");
+            case ORANGE -> contentBox.getStyleClass().add("orange-belt");
+            case GREEN -> contentBox.getStyleClass().add("green-belt");
+            case BLUE -> contentBox.getStyleClass().add("blue-belt");
+            case PURPLE -> contentBox.getStyleClass().add("purple-belt");
+            case BROWN -> contentBox.getStyleClass().add("brown-belt");
+            case RED -> contentBox.getStyleClass().add("red-belt");
+            case BLACK -> contentBox.getStyleClass().add("black-belt");
+            default -> contentBox.getStyleClass().add("gbs");
         }
+        authorLabel.getStyleClass().add("labels");
+        nameLabel.getStyleClass().add("labels");
+        releaseLabel.getStyleClass().add("labels");
 
+        authorLabel.getStyleClass().add("author");
+        nameLabel.getStyleClass().add("name");
+        nameLabel.setWrapText(true);
+        nameLabel.setPadding(new Insets(0));
+        releaseLabel.getStyleClass().add("release");
 
-        authorBox.setAlignment(Pos.CENTER);
-        authorBox.setPrefSize(110,50);
-        authorBox.getChildren().addAll(authorLabel);
-
-
-        /*
-            Release Box 
-         */
-        VBox releaseBox = new VBox();
-        releaseBox.getStyleClass().add("game-release-box");
-        releaseBox.setAlignment(Pos.BOTTOM_LEFT);
-        releaseBox.setPrefSize(100,50);
-        releaseBox.getChildren().addAll(releaseLabel);
-
-        authorLabel.setAlignment(Pos.TOP_CENTER);
-
-
-
-
-
-        buttonGraphic.getChildren().addAll(titleBox,authorBox,releaseBox);
-        return buttonGraphic;
-
+        topLabelBox.getChildren().addAll(authorLabel, nameLabel);
+        bottomLabelBox.getChildren().add(releaseLabel);
+        contentBox.getChildren().addAll(topLabelBox, recPicture, bottomLabelBox);
+        return contentBox;
 
     }
+
 
     /*
     This will populate the grid with game thumbnails
      */
-    public GridPane populateGrid(ArrayList<CreateGame> gameArr, int colNum){
-        GridPane resultGrid = new GridPane();
+    public void populateGrid(ArrayList<CreateGame> gameArr, int colNum){
+        this.workingGrid = new GridPane();
+        ArrayList<VBox> rowArray = new ArrayList<>();
+        workingGrid.setAlignment(Pos.TOP_CENTER);
+        workingGrid.setHgap(20);
+        workingGrid.setVgap(10);
         int row = 0;
-        int col = colNum;
+        int col = 0;
         for(int i = 0; i < gameArr.size(); i++){
-            resultGrid.add(thumbnailBuilder(gameArr.get(i)), col, row);
+            VBox currBox = thumbnailBuilder(gameArr.get(i));
+            rowArray.add(currBox);
+            workingGrid.add(currBox, col, row);
             if(col == colNum){
+                this.gameBoxArr.add(rowArray);
+                rowArray = new ArrayList<VBox>();
                 row++;
                 col = 0;
             }
             else{
                 col++;
             }
-
         }
-        return resultGrid;
+        if(!rowArray.isEmpty()){
+            this.gameBoxArr.add(rowArray);
+        }
+
     }
     public ArrayList<VBox> populateArray(ArrayList<CreateGame> gameArr){
         ArrayList<VBox> result = new ArrayList<>();
@@ -292,9 +289,5 @@ public class HelloApplication extends Application {
             result.add(thumbnailBuilder(gameArr.get(i)));
         }
         return result;
-
-    }
-    public void moveHighlightUp(){
-
     }
 }
