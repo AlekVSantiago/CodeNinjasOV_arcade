@@ -90,6 +90,13 @@ public class HelloApplication extends Application {
                 });
          */
 
+	
+	/*
+	 * TODO
+	 * Refactor the buttons to just be a label or a VBox or something because it isn't going to actually be pressed
+	 *
+	 */
+
         //Initialize the Quest Button
         Button questBtn = new Button("ADVENTURE");
         questBtn.setPrefSize(180, 110);
@@ -110,14 +117,25 @@ public class HelloApplication extends Application {
         senseiBtn.setPrefSize(180, 110);
         senseiBtn.getStyleClass().add("big-button");
 
- 	
+	//Initialize the sorting buttons
+	Label sortLabel = new Label("Sort");
+	sortLabel.setPrefSize(60, 70);
+	sortLabel.getStyleClass().add("sort-button");
 
+	//SortBox
+	VBox sortSelection = new VBox(10);
+	Label beltSortLabel = new Label("Belt");
+	Label authorSortLabel = new Label("Author");
+        Label releaseSortLabel = new Label("Release Date");
+
+	sortSelection.getChildren().addAll(beltSortLabel, authorSortLabel, releaseSortLabel);
+	
 	// buttonBox setUp
-        buttonBox.getChildren().addAll(questBtn, freeBtn, buildBtn, senseiBtn);
+        buttonBox.getChildren().addAll(questBtn, freeBtn, buildBtn, senseiBtn, sortSelection);
         buttonBox.setSpacing(40);
         buttonBox.setAlignment(Pos.TOP_CENTER);
 
-
+	
         populateGrid(controller.getModel().getCurrGames(), column);
 
         ScrollPane gameScroll = new ScrollPane(workingGrid);
@@ -180,7 +198,6 @@ public class HelloApplication extends Application {
 
 
 
-        controller.sortAllBelt();
         stage.setTitle("Code Ninjas OV ARCADE");
         stage.setFullScreen(true);
         stage.setScene(scene);
