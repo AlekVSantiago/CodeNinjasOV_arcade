@@ -22,13 +22,6 @@ public class Controller {
         this.model = model;
     }
 
-    /*
-    Format for the CSV for reference
-        0       1       2      3          4         5      6
-        Name    Author  URL
-        ----------------------BeltColor  TwoPlayer  Genre  Tag
-        ----------------------Template
-     */
     public Model initializeModel() throws Exception {
         File file = new File("/Users/aleksantiago/Desktop/codeNinjas/CodeNinjasOV_arcade/src/games.csv");
         Scanner scanner = new Scanner(file);

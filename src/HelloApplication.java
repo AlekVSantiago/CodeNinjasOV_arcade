@@ -90,23 +90,29 @@ public class HelloApplication extends Application {
                 });
          */
 
-        /*
-        Button Tabs Collection
-         */
+        //Initialize the Quest Button
         Button questBtn = new Button("ADVENTURE");
         questBtn.setPrefSize(180, 110);
         questBtn.getStyleClass().add("big-button");
+
+	//Initialize the Freebuild Button
         Button freeBtn = new Button("SANDBOX");
         freeBtn.setPrefSize(180, 110);
         freeBtn.getStyleClass().add("big-button");
+
+	//Initialize the Build Button
         Button buildBtn = new Button("Game Build Session");
         buildBtn.setPrefSize(300, 110);
         buildBtn.getStyleClass().add("big-button");
+
+ 	//Initialize Sensei button
         Button senseiBtn = new Button("SENSEI");
         senseiBtn.setPrefSize(180, 110);
         senseiBtn.getStyleClass().add("big-button");
-        Button workingBtn = questBtn;
-        workingBtn.getStyleClass().add("big-button");
+
+ 	
+
+	// buttonBox setUp
         buttonBox.getChildren().addAll(questBtn, freeBtn, buildBtn, senseiBtn);
         buttonBox.setSpacing(40);
         buttonBox.setAlignment(Pos.TOP_CENTER);
@@ -174,7 +180,7 @@ public class HelloApplication extends Application {
 
 
 
-
+        controller.sortAllBelt();
         stage.setTitle("Code Ninjas OV ARCADE");
         stage.setFullScreen(true);
         stage.setScene(scene);

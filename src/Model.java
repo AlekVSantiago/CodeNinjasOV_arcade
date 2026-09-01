@@ -6,13 +6,22 @@ public class Model {
         Fields
         all of the lists and such
      -------------------------*/
+    //The entire Library of games inside of the program
     private ArrayList<CreateGame> library;
+
+    // ArrayList of games separated by categories
     private ArrayList<CreateGame> questGames;
     private ArrayList<CreateGame> freestyleGames;
     private ArrayList<CreateGame> gbsGames;
     private ArrayList<CreateGame> senseiGames;
+    
+    //ArrayList of the current games that are within view of the user
     private ArrayList<CreateGame> currGames;
+
+
+     //Enum of the theme
     private Theme theme;
+
 
     /*---------------------
         Constructor
@@ -23,6 +32,7 @@ public class Model {
           ArrayList<CreateGame> gbsGames,
           ArrayList<CreateGame> senseiGames,
           Theme theme){
+
         this.library = library;
         this.questGames = questGames;
         this.freestyleGames = freestyleGames;
@@ -30,7 +40,6 @@ public class Model {
         this.senseiGames = senseiGames;
         this.currGames = senseiGames;
         this.theme = theme;
-
     }
 
     /*---------------------

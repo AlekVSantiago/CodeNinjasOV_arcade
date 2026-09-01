@@ -25,7 +25,6 @@ public class GBSGame extends Game{
 
     public void setTemplate(Template template){
         this.template = template;
-
     }
 
 }
