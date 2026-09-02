@@ -22,116 +22,89 @@ public class HelloApplication extends Application {
     int currCol = 0;
 
     public void start(Stage stage) throws Exception {
-        Font.loadFont(getClass().getResourceAsStream("src/fonts/ARCADECLASSIC.TTF"), 18);
-        Font.loadFont(getClass().getResourceAsStream("src/fonts/ka1.ttf"), 18);
-        Controller controller = new Controller();
-        int column = 4;
+	//Initialize the Scene
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("StyleSheet.css");
 
+	// Initialize the controller instance
+        Controller controller = new Controller();
+        int column = 4;//TODO this does not feel right to put this here. 
 
         /* 1--------------------------
             INITIALIZING ALL UI COMPONENTS
             --------------------------
          */
-
-        /*
-            Housing for all of the nodes
-         */
+	//Initialize Border Pane
         BorderPane root = new BorderPane();
         root.getStyleClass().add("root");
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("StyleSheet.css");
         root.getStylesheets().add("my-node");
-        VBox mainBox = new VBox();
-        VBox topBox = new VBox();
-        mainBox.setSpacing(0);
-        mainBox.getStyleClass().add("main-box");
+	
+	//Initialize mainBox, topBox and buttonBox
+        VBox topBox = new VBox();//box containing all tope elements
         topBox.getStyleClass().add("top-box");
         topBox.setSpacing(20);
-        VBox.setMargin(topBox, new Insets(20, 15, 0, 15));
-        HBox buttonBox = new HBox();
 
-        //setting Panes and Boxes with each other
+        VBox mainBox = new VBox();//box that holds all of the games in the selection 
+        mainBox.setSpacing(0);
+        mainBox.getStyleClass().add("main-box");
+        mainBox.setAlignment(Pos.TOP_LEFT);
+
+        HBox buttonBox = new HBox(); //box containing all of the top category and control buttons (buttons over the game)
+	
+        VBox.setMargin(topBox, new Insets(20, 15, 0, 15));//Setting up margins for the topbox
+
+
         Label appTitle = new Label("Code Ninjas ARCADE");
         appTitle.getStyleClass().add("app-title");
+
+        //setting Panes and Boxes with each other
         topBox.getChildren().addAll(appTitle, buttonBox);
         mainBox.getChildren().addAll(topBox);
-        mainBox.setAlignment(Pos.TOP_LEFT);
         root.setCenter(mainBox);
 
-
-        Font.loadFont(getClass().getResourceAsStream("/fonts/myfont.ttf"), 18);
-
-
-        /*
-            REFERENCES
-
-                ----------------Scrolling the ScrolePane with controls-------------
-                scrollPane.setVvalue(scrollPane.getVvalue() + 0.1); // scroll down
-                scrollPane.setVvalue(scrollPane.getVvalue() - 0.1); // scroll up
-
-
-
-                ----------------KeyCode Pressing and releasing---------------------
-                boolean isHeld = false;
-
-
-                ----------------Scrolling the ScrolePane with controls-------------
-               boolean isHeld = false;
-
-                scene.setOnKeyPressed(event -> {
-                    if(event.getCode() == KeyCode.A){
-                        isHeld = true;
-                    }
-                });
-                scene.setOnKeyReleased(event -> {
-                    if(event.getCode() == KeyCode.A){
-                        isHeld = false;
-                    }
-                });
-         */
-
-	
 	/*
-	 * TODO
-	 * Refactor the buttons to just be a label or a VBox or something because it isn't going to actually be pressed
-	 *
+	 * Initializing all of the category buttons (Main buttons)
 	 */
+	VBox questBox = new VBox();//Quest Box
+	Label questLabel = new Label("Quest");
 
-        //Initialize the Quest Button
-        Button questBtn = new Button("ADVENTURE");
-        questBtn.setPrefSize(180, 110);
-        questBtn.getStyleClass().add("big-button");
 
-	//Initialize the Freebuild Button
-        Button freeBtn = new Button("SANDBOX");
-        freeBtn.setPrefSize(180, 110);
-        freeBtn.getStyleClass().add("big-button");
+	VBox freeBox = new VBox();//Free Box
+	Label freeLabel = new Label("FreeStyle");
 
-	//Initialize the Build Button
-        Button buildBtn = new Button("Game Build Session");
-        buildBtn.setPrefSize(300, 110);
-        buildBtn.getStyleClass().add("big-button");
 
- 	//Initialize Sensei button
-        Button senseiBtn = new Button("SENSEI");
-        senseiBtn.setPrefSize(180, 110);
-        senseiBtn.getStyleClass().add("big-button");
+	VBox buildBox = new VBox();//Build Box
+	Label buildLabel = new Label("GBS");
 
-	//Initialize the sorting buttons
-	Label sortLabel = new Label("Sort");
-	sortLabel.setPrefSize(60, 70);
-	sortLabel.getStyleClass().add("sort-button");
 
-	//SortBox
-	VBox sortSelection = new VBox(10);
+	VBox senseiBox = new VBox(); //Sensei box
+	Label senseiLabel = new Label("Sensei");
+
+
+	//Initializing and configuring all elements inside of the sort menu
+	VBox sortSelection = new VBox(10); //Box containing all sort buttons
+	sortSelection.getStyleClass().add("sort-box");
+	
+	//All sort buttons as a VBox
+	VBox beltSortBox = new VBox(); //Belt Sort
 	Label beltSortLabel = new Label("Belt");
+	beltSortBox.getStyleClass().add("sort-button");
+	beltSortLabel.getStyleClass().add("sort-label");
+
+	VBox authorSortBox = new VBox(); //Author Sort
 	Label authorSortLabel = new Label("Author");
+	authorSortBox.getStyleClass().add("sort-button");	
+	authorSortLabel.getStyleClass().add("sort-label");
+
+	VBox releaseSortBox = new VBox();//Release Sort
         Label releaseSortLabel = new Label("Release Date");
+	releaseSortBox.getStyleClass().add("sort-button");
+	releaseSortLabel.getStyleClass().add("sort-label");
 
 	sortSelection.getChildren().addAll(beltSortLabel, authorSortLabel, releaseSortLabel);
 	
 	// buttonBox setUp
-        buttonBox.getChildren().addAll(questBtn, freeBtn, buildBtn, senseiBtn, sortSelection);
+        buttonBox.getChildren().addAll(questBox, freeBox, buildBox, senseiBox);
         buttonBox.setSpacing(40);
         buttonBox.setAlignment(Pos.TOP_CENTER);
 
@@ -145,6 +118,8 @@ public class HelloApplication extends Application {
         mainBox.getChildren().add(gameScroll);
         mainBox.setPadding(new Insets(0));
         mainBox.setSpacing(0);
+
+	
 
 
         /*
@@ -314,3 +289,31 @@ public class HelloApplication extends Application {
         return result;
     }
 }
+
+        /*
+            REFERENCES
+
+                ----------------Scrolling the ScrolePane with controls-------------
+                scrollPane.setVvalue(scrollPane.getVvalue() + 0.1); // scroll down
+                scrollPane.setVvalue(scrollPane.getVvalue() - 0.1); // scroll up
+
+
+
+                ----------------KeyCode Pressing and releasing---------------------
+                boolean isHeld = false;
+
+
+                ----------------Scrolling the ScrolePane with controls-------------
+               boolean isHeld = false;
+
+                scene.setOnKeyPressed(event -> {
+                    if(event.getCode() == KeyCode.A){
+                        isHeld = true;
+                    }
+                });
+                scene.setOnKeyReleased(event -> {
+                    if(event.getCode() == KeyCode.A){
+                        isHeld = false;
+                    }
+                });
+         */
