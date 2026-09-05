@@ -23,7 +23,6 @@ public class HelloApplication extends Application {
 
     public void start(Stage stage) throws Exception {
 	//Initialize the Scene
-        Scene scene = new Scene(root);
         scene.getStylesheets().add("StyleSheet.css");
 
 	// Initialize the controller instance
@@ -36,6 +35,8 @@ public class HelloApplication extends Application {
          */
 	//Initialize Border Pane
         BorderPane root = new BorderPane();
+
+        Scene scene = new Scene(root);
         root.getStyleClass().add("root");
         root.getStylesheets().add("my-node");
 	
